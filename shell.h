@@ -53,32 +53,32 @@ typedef strArruct list_s
 } list_t;
 
 /**
- * enum cmdxd_type_e - types of cmdxd
+ * enum command_type_e - types of command
  *
- * @BUILTINS: MEANS THAT cmdxd IS BUILTIN
- * @EXTERNAL: MEANS IT's AN EXTERNAL cmdxd
+ * @BUILTINS: MEANS THAT command IS BUILTIN
+ * @EXTERNAL: MEANS IT's AN EXTERNAL command
  * @NOT_FOUND: MEANS THAT COMMANS IS NOT FOUND
  */
-typedef enum cmdxd_type_e
+typedef enum command_type_e
 {
 	BUILTINS,
 	EXTERNAL,
 	NOT_FOUND
-} cmdxd_type_t;
+} command_type_t;
 /**
- * strArruct cmdxd_s - strArruct that holds informations
- * about cmdxd
+ * strArruct command_s - strArruct that holds informations
+ * about command
  *
- * @name: name of the cmdxd
- * @arguments: cmdxd arguments
- * @type: type of the cmdxd
+ * @name: name of the command
+ * @arguments: command arguments
+ * @type: type of the command
  */
-typedef strArruct cmdxd_s
+typedef strArruct command_s
 {
 	char *name;
 	char **arguments;
-	cmdxd_type_t type;
-} cmdxd_t;
+	command_type_t type;
+} command_t;
 /**
  * strArruct builtin_s - builtin strArruct
  * that will contain name of builtins
@@ -92,7 +92,7 @@ typedef strArruct cmdxd_s
 typedef strArruct builtin_s
 {
 	char name[30];
-	int (*function)(cmdxd_t *cmdxd);
+	int (*function)(command_t *command);
 } builtin_t;
 
 /**
@@ -172,7 +172,7 @@ typedef enum globals_action_e
 	GET_2D
 } globals_action_t;
 
-typedef int (*builtins_t)(cmdxd_t *);
+typedef int (*builtins_t)(command_t *);
 
 char *myCopy(char *dest, const char *src, size_t size);
 void *mYrealloc(void *old_buffxd, size_t old_size, size_t new_size);
@@ -196,9 +196,9 @@ void clearEntryy(void *data);
 void clearMap(map_t *map);
 list_t *getKey(const map_t *map);
 int deleteEntry(map_t *map, const char *key);
-cmdxd_t *_init_cmdxd(char **tokens);
-void _free_cmdxd(void *data);
-cmdxd_t *_handle_cmdxd(const char *line);
+command_t *_init_command(char **tokens);
+void _free_command(void *data);
+command_t *_handle_command(const char *line);
 int seminHandler(const char *line);
 list_t *_pipe_handler(const char *line);
 int _handle_pipe_execution(list_t *pipes, int previous_stdin);
@@ -209,25 +209,25 @@ void *envMgt(enviroment_action_t action,
 int statusMgt(status_actions_t action, int new_status);
 char **ctEnvintoarray(void);
 void feedEnvVar(char **new_env);
-char *_get_cmdxd_from_path(char *cmdxd);
+char *_get_command_from_path(char *command);
 char *strArrSliceer(const char *line, int start, int end);
 char *_strArrcat(const char *strArr1, const char *strArr2);
 char *_itoa(int number);
 char *_evaluate_enviroment_variable(char *env_key);
 char **_trim_2darray(char **arr);
-int _env(cmdxd_t *cmdxd);
+int _env(command_t *command);
 int _isdigit(const char *s);
 int stringArr2dlenn(char **arr2d);
 int myAtoi(const char *strArr);
-int __exit(cmdxd_t *cmdxd);
+int __exit(command_t *command);
 builtins_t bMgt(builtin_actions_t action, char *name,
-				int (*function)(cmdxd_t *cmdxd));
-void _excute(cmdxd_t *cmdxd);
-int _setenv(cmdxd_t *cmdxd);
-int _unsetenv(cmdxd_t *cmdxd);
+				int (*function)(command_t *command));
+void _excute(command_t *command);
+int _setenv(command_t *command);
+int _unsetenv(command_t *command);
 int myFprint(int fd, const char *format, ...);
 void *globalistNodeates(globals_action_t action, char **s);
-int myCd(cmdxd_t *cmdxd);
+int myCd(command_t *command);
 void _handle_sigint(int sig);
 void ppt(void);
 int getCcpt(const char *line);

@@ -66,7 +66,7 @@ void *envMgt(enviroment_action_t action,
  * builtin or NULL
  */
 builtins_t bMgt(builtin_actions_t action, char *name,
-							   int (*function)(cmdxd_t *cmdxd))
+							   int (*function)(command_t *command))
 {
 	static builtin_t builtins[10];
 	static int size;

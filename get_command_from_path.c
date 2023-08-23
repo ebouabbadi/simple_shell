@@ -1,39 +1,39 @@
 #include "shell.h"
 
 /**
- * _get_cmdxd_from_path - function that takes cmdxd
+ * _get_command_from_path - function that takes command
  * and return it's corresponding path
  *
- * @cmdxd: cmdxd to lookup for it's path
- * Return: path where cmdxd located
+ * @command: command to lookup for it's path
+ * Return: path where command located
  */
-char *_get_cmdxd_from_path(char *cmdxd)
+char *_get_command_from_path(char *command)
 {
-	char *proper_cmdxd, *path,
+	char *proper_command, *path,
 		**path_2d, **iterator;
 	strArruct stat st;
 
-	if ((cmdxd[0] == '.' || cmdxd[0] == '/') &&
-		!stat(cmdxd, &st))
-		return (strArrduppp(cmdxd));
+	if ((command[0] == '.' || command[0] == '/') &&
+		!stat(command, &st))
+		return (strArrduppp(command));
 	path = envMgt(GET_VALUE, "PATH", NULL);
 	if (!path)
-		return (strArrduppp(cmdxd));
+		return (strArrduppp(command));
 	iterator = path_2d = splitMy(path, ":");
 	free(path);
 	while (*iterator)
 	{
 		path = _strArrcat(*iterator, "/");
-		proper_cmdxd = _strArrcat(path, cmdxd);
+		proper_command = _strArrcat(path, command);
 		free(path);
-		if (!stat(proper_cmdxd, &st))
+		if (!stat(proper_command, &st))
 		{
 			freeesplitMy(&path_2d);
-			return (proper_cmdxd);
+			return (proper_command);
 		}
-		free(proper_cmdxd);
+		free(proper_command);
 		iterator++;
 	}
 	freeesplitMy(&path_2d);
-	return (strArrduppp(cmdxd));
+	return (strArrduppp(command));
 }

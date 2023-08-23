@@ -5,15 +5,15 @@
  * add new entries to our envs
  * or update entries from it
  *
- * @cmdxd: strArruct that stores information
- * about current running cmdxd
+ * @command: strArruct that stores information
+ * about current running command
  * Return: (0) success otherwise error
  */
-int _setenv(cmdxd_t *cmdxd)
+int _setenv(command_t *command)
 {
 	int len;
 
-	len = stringArr2dlenn(cmdxd->arguments + 1);
+	len = stringArr2dlenn(command->arguments + 1);
 	if (len != 2)
 	{
 		myFprint(2, "%s: Invalid number of arguments\n",
@@ -22,7 +22,7 @@ int _setenv(cmdxd_t *cmdxd)
 	}
 	envMgt(
 		SET_ENTRY,
-		cmdxd->arguments[1],
-		cmdxd->arguments[2]);
+		command->arguments[1],
+		command->arguments[2]);
 	return (0);
 }

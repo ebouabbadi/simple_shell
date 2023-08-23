@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _free_cmdxd - function that frees cmdxd
+ * _free_command - function that frees command
  *
  * @data: data to be freed
  * Return: Nothing
  */
-void _free_cmdxd(void *data)
+void _free_command(void *data)
 {
-	cmdxd_t *cmd;
+	command_t *cmd;
 
 	cmd = data;
 	freeesplitMy(&cmd->arguments);
@@ -16,64 +16,64 @@ void _free_cmdxd(void *data)
 }
 
 /**
- * _lookup_for_cmdxd - function that search
- * for given cmdxd on the builtins
+ * _lookup_for_command - function that search
+ * for given command on the builtins
  * as well as in the path
  *
- * @cmdxd: to lookup for
- * @type: the type of the cmdxd
- * Return: proper path or cmdxd if it's builtin
+ * @command: to lookup for
+ * @type: the type of the command
+ * Return: proper path or command if it's builtin
  */
-char *_lookup_for_cmdxd(char *cmdxd, cmdxd_type_t *type)
+char *_lookup_for_command(char *command, command_type_t *type)
 {
 
-	if (bMgt(GET_BUILTIN, cmdxd, NULL))
+	if (bMgt(GET_BUILTIN, command, NULL))
 	{
 		*type = BUILTINS;
-		return (strArrduppp(cmdxd));
+		return (strArrduppp(command));
 	}
 
-	return (_get_cmdxd_from_path(cmdxd));
+	return (_get_command_from_path(command));
 }
 /**
- * _init_cmdxd - function that initialize our
- * cmdxd
+ * _init_command - function that initialize our
+ * command
  *
- * @tokens: 2d array holds all cmdxd arguments
- * and it contain cmdxd name in the first argument
- * Return: allocated cmdxd
+ * @tokens: 2d array holds all command arguments
+ * and it contain command name in the first argument
+ * Return: allocated command
  */
-cmdxd_t *_init_cmdxd(char **tokens)
+command_t *_init_command(char **tokens)
 {
-	cmdxd_t *cmdxd;
+	command_t *command;
 	strArruct stat st;
-	char *scmdxd;
+	char *scommand;
 
-	cmdxd = malloc(sizeof(cmdxd_t));
-	if (!cmdxd)
+	command = malloc(sizeof(command_t));
+	if (!command)
 		return (NULL);
-	cmdxd->type = NOT_FOUND;
-	scmdxd = _lookup_for_cmdxd(tokens[0], &cmdxd->type);
+	command->type = NOT_FOUND;
+	scommand = _lookup_for_command(tokens[0], &command->type);
 	free(tokens[0]);
-	tokens[0] = scmdxd;
-	if (cmdxd->type == NOT_FOUND &&
+	tokens[0] = scommand;
+	if (command->type == NOT_FOUND &&
 		(tokens[0][0] == '.' || tokens[0][0] == '/') &&
 		!stat(tokens[0], &st))
-		cmdxd->type = EXTERNAL;
-	cmdxd->arguments = tokens;
-	cmdxd->name = tokens[0];
-	return (cmdxd);
+		command->type = EXTERNAL;
+	command->arguments = tokens;
+	command->name = tokens[0];
+	return (command);
 }
 /**
- * _handle_cmdxd - function that takes line
- * and turn into an easy cmdxd to work with
+ * _handle_command - function that takes line
+ * and turn into an easy command to work with
  *
  * @line: to be parsed
  * Return: well strArrucered method
  */
-cmdxd_t *_handle_cmdxd(const char *line)
+command_t *_handle_command(const char *line)
 {
-	char *trimmed_line, *cmdxd_name;
+	char *trimmed_line, *command_name;
 	char **tokens[2];
 	int iterator;
 
@@ -87,10 +87,10 @@ cmdxd_t *_handle_cmdxd(const char *line)
 	{
 		if (tokens[0][iterator][0] == '$')
 		{
-			cmdxd_name = _evaluate_enviroment_variable(tokens[0][iterator] + 1);
+			command_name = _evaluate_enviroment_variable(tokens[0][iterator] + 1);
 			free(tokens[0][iterator]);
-			if (cmdxd_name)
-				tokens[0][iterator] = cmdxd_name;
+			if (command_name)
+				tokens[0][iterator] = command_name;
 			else
 				tokens[0][iterator] = strArrduppp("");
 		}
@@ -98,5 +98,5 @@ cmdxd_t *_handle_cmdxd(const char *line)
 	}
 	tokens[1] = _trim_2darray(tokens[0]);
 	freeesplitMy(&tokens[0]);
-	return (_init_cmdxd(tokens[1]));
+	return (_init_command(tokens[1]));
 }

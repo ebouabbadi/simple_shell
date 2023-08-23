@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- * _execution_handler - function that take cmdxd
- * and execute it if cmdxd is file otherwise
+ * _execution_handler - function that take command
+ * and execute it if command is file otherwise
  * persmission and status is been set to (126)
  *
- * @cmdxd: cmdxd to be executed
+ * @command: command to be executed
  * Return: Nothing
  */
-void _execution_handler(cmdxd_t *cmdxd)
+void _execution_handler(command_t *command)
 {
-	if (access(cmdxd->name, F_OK | X_OK) != -1)
-		_excute(cmdxd);
+	if (access(command->name, F_OK | X_OK) != -1)
+		_excute(command);
 	else
 	{
 		myFprint(2, "%s: %d: %s: Permission denied\n",
 				(char *)globalistNodeates(GET_SHELL_NAME, NULL),
 				*((int *)globalistNodeates(GET_LINE_NUMBER, NULL)),
-				cmdxd->name);
+				command->name);
 		statusMgt(UPDATE_STATUS, 126);
 	}
 }
@@ -26,45 +26,45 @@ void _execution_handler(cmdxd_t *cmdxd)
  * line bu semicolon and pass the result to be
  * handled by other functions
  *
- * @line: cmdxd line to be parsed and executed
+ * @line: command line to be parsed and executed
  * Return: 1 on success or 0 signifying error
  */
 int seminHandler(const char *line)
 {
-	char **semi_cmdxds, **iterator;
-	cmdxd_t *cmdxd;
+	char **semi_commands, **iterator;
+	command_t *command;
 	int argument_length;
 
-	iterator = semi_cmdxds = splitMy(line, ";");
+	iterator = semi_commands = splitMy(line, ";");
 	if (!iterator)
 		return (1);
 	while (*iterator)
 	{
-		cmdxd = _handle_cmdxd(*iterator);
-		if (cmdxd->type == NOT_FOUND)
+		command = _handle_command(*iterator);
+		if (command->type == NOT_FOUND)
 		{
 			myFprint(2, "%s: %d: %s: not found\n",
 					(char *)globalistNodeates(GET_SHELL_NAME, NULL),
 					*((int *)globalistNodeates(GET_LINE_NUMBER, NULL)),
-					cmdxd->name);
+					command->name);
 			statusMgt(UPDATE_STATUS, 127);
 		}
-		else if (cmdxd->type == EXTERNAL)
-			_execution_handler(cmdxd);
+		else if (command->type == EXTERNAL)
+			_execution_handler(command);
 		else
 		{
-			globalistNodeates(SET_2D, semi_cmdxds);
+			globalistNodeates(SET_2D, semi_commands);
 			statusMgt(UPDATE_STATUS,
 							   bMgt(
 								   GET_BUILTIN,
-								   cmdxd->name, NULL)(cmdxd));
+								   command->name, NULL)(command));
 		}
-		argument_length = stringArr2dlenn(cmdxd->arguments);
+		argument_length = stringArr2dlenn(command->arguments);
 		envMgt(SET_ENTRY, "_",
-							   cmdxd->arguments[argument_length - 1]);
-		_free_cmdxd(cmdxd);
+							   command->arguments[argument_length - 1]);
+		_free_command(command);
 		iterator++;
 	}
-	freeesplitMy(&semi_cmdxds);
+	freeesplitMy(&semi_commands);
 	return (0);
 }

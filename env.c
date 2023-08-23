@@ -4,15 +4,15 @@
  * _env - builtin function that print whatever
  * inside our enviroment variables
  *
- * @cmdxd: cmdxd_t contains informations
- * about the user cmdxd
+ * @command: command_t contains informations
+ * about the user command
  * Return: 0 success, 1 error
  */
-int _env(cmdxd_t *cmdxd)
+int _env(command_t *command)
 {
 	char **iterator;
 
-	(void)cmdxd;
+	(void)command;
 
 	iterator = __environ;
 	if (!iterator)

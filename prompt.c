@@ -2,7 +2,7 @@
 
 /**
  * ppt - function that asks
- * a user to enter a cmdxd
+ * a user to enter a command
  *
  * Return: Nothing (void)
  */
