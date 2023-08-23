@@ -55,8 +55,8 @@ typedef strArruct list_s
 /**
  * enum command_type_e - types of command
  *
- * @BUILTINS: MEANS THAT command IS BUILTIN
- * @EXTERNAL: MEANS IT's AN EXTERNAL command
+ * @BUILTINS: MEANS THAT COMMAND IS BUILTIN
+ * @EXTERNAL: MEANS IT's AN EXTERNAL COMMAND
  * @NOT_FOUND: MEANS THAT COMMANS IS NOT FOUND
  */
 typedef enum command_type_e
@@ -192,7 +192,7 @@ int _get_hash_code(const char *key);
 map_t *initMp(void);
 int setValue(map_t *map, const char *key, const char *value);
 char *getValue(const map_t *map, const char *key);
-void clearEntryy(void *data);
+void _clear_entry(void *data);
 void clearMap(map_t *map);
 list_t *getKey(const map_t *map);
 int deleteEntry(map_t *map, const char *key);
@@ -217,7 +217,7 @@ char *_evaluate_enviroment_variable(char *env_key);
 char **_trim_2darray(char **arr);
 int _env(command_t *command);
 int _isdigit(const char *s);
-int stringArr2dlenn(char **arr2d);
+int _strArr2dlen(char **arr2d);
 int myAtoi(const char *strArr);
 int __exit(command_t *command);
 builtins_t bMgt(builtin_actions_t action, char *name,

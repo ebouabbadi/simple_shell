@@ -3,21 +3,21 @@
 /**
  * check_diameter - functions that look up for next diameter
  *
- * @strArr: strArring
+ * @str: string
  * @diameter: diameter that will be used when splitting
- * Return: 0 if the strArr doesn't contain diameter, 1 when diameter found
+ * Return: 0 if the str doesn't contain diameter, 1 when diameter found
  * 2 when diameter found in but followed by last character of the diameter
  */
-int check_diameter(const char *strArr, const char *diameter)
+int check_diameter(const char *str, const char *diameter)
 {
 	size_t iter;
 
 	iter = 0;
-	while (strArr[iter] && diameter[iter] && strArr[iter] == diameter[iter])
+	while (str[iter] && diameter[iter] && str[iter] == diameter[iter])
 		iter++;
 	if (diameter[iter])
 		return (0);
-	if (strArr[iter] == diameter[iter - 1])
+	if (str[iter] == diameter[iter - 1])
 		return (2);
 	return (1);
 }
@@ -26,8 +26,8 @@ int check_diameter(const char *strArr, const char *diameter)
  * backet_count - function calculate number of
  * backets that is splited by diameter
  *
- * @line: buffxd to look up in
- * @diameter: buffxd to look up for
+ * @line: buffer to look up in
+ * @diameter: buffer to look up for
  * Return:  number of backets
  */
 size_t backet_count(const char *line, const char *diameter)
@@ -57,7 +57,7 @@ size_t backet_count(const char *line, const char *diameter)
 			else
 			{
 				counter++;
-				index += mYstrArrlen(diameter);
+				index += _strlen(diameter);
 			}
 		}
 		else
@@ -70,8 +70,8 @@ size_t backet_count(const char *line, const char *diameter)
  * get_next_diameter - function return the start of
  * the next occurance of  diameter
  *
- * @line: buffxd to look up in
- * @diameter: buffxd to look up for
+ * @line: buffer to look up in
+ * @diameter: buffer to look up for
  * Return: position of the next occurance of the diameter
  */
 size_t get_next_diameter(const char *line, const char *diameter)
@@ -129,7 +129,7 @@ void free_backets(char **backets, size_t current_position)
  * splitMy - function that splits given line by
  * given diameter
  *
- * @line: buffxd to be splitted
+ * @line: buffer to be splitted
  * @diameter: to split with
  * Return: 2d array that ends with NULL
  * or NULL in case of error
@@ -155,9 +155,9 @@ char **splitMy(const char *line, const char *diameter)
 			free_backets(backets, backet_index);
 			return (NULL);
 		}
-		myCopy(backets[backet_index], line + current_line_position, next_diameter);
+		_copy(backets[backet_index], line + current_line_position, next_diameter);
 		backet_index++;
-		current_line_position += next_diameter + mYstrArrlen(diameter);
+		current_line_position += next_diameter + _strlen(diameter);
 	}
 	backets[backet_length] = NULL;
 	return (backets);

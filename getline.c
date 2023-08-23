@@ -1,18 +1,18 @@
 #include "shell.h"
 
 /**
- * fxewline - function that look up for newline or end of the buffxd
+ * fxewline - function that look up for newline or end of the buffer
  *
- * @buffxd: buffxd to look up in
- * @length: the length of the buffxd
+ * @buffer: buffer to look up in
+ * @length: the length of the buffer
  * Return: number of read character or -1 in case of error
  */
-size_t fxewline(char *buffxd, size_t length)
+size_t fxewline(char *buffer, size_t length)
 {
 	size_t position;
 
 	position = 0;
-	while (position < length && buffxd[position] != '\n')
+	while (position < length && buffer[position] != '\n')
 		position++;
 	return (position);
 }
@@ -24,36 +24,36 @@ size_t fxewline(char *buffxd, size_t length)
  */
 ssize_t getLinee(char **line)
 {
-	static char buffxd[buffxd_SIZE];
-	static ssize_t current_position, end_of_buffxd;
+	static char buffer[BUFFER_SIZE];
+	static ssize_t current_position, end_of_buffer;
 	ssize_t old_size, next_newline;
 
 	*line = NULL;
 	old_size = 0;
 	while (1)
 	{
-		if (current_position >= end_of_buffxd)
+		if (current_position >= end_of_buffer)
 		{
-			end_of_buffxd = read(STDIN_FILENO, buffxd, buffxd_SIZE);
+			end_of_buffer = read(STDIN_FILENO, buffer, BUFFER_SIZE);
 			current_position = 0;
-			if (end_of_buffxd < 0)
+			if (end_of_buffer < 0)
 			{
 				free(*line);
 				*line = NULL;
 				return (-1);
 			}
-			if (end_of_buffxd == 0)
+			if (end_of_buffer == 0)
 				return (old_size);
 		}
-		next_newline = fxewline(buffxd + current_position,
-										 end_of_buffxd - current_position);
+		next_newline = fxewline(buffer + current_position,
+										 end_of_buffer - current_position);
 		*line = mYrealloc(*line, old_size, old_size + next_newline);
 		if (!*line)
 			return (-1);
-		myCopy((*line) + old_size, buffxd + current_position, next_newline);
+		myCopy((*line) + old_size, buffer + current_position, next_newline);
 		old_size += next_newline;
 		current_position += next_newline;
-		if (current_position < end_of_buffxd)
+		if (current_position < end_of_buffer)
 		{
 			current_position++;
 			return (old_size);

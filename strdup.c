@@ -1,27 +1,27 @@
 #include "shell.h"
 
 /**
-* strArrduppp - function that takes a strArring and duplicates
-* it and return new pointer of duplicated strArring
+* strduppp - function that takes a string and duplicates
+* it and return new pointer of duplicated string
 *
-* @strArr: strArring to be duplicated
-* Return: new char pointer to the new strArring
+* @str: string to be duplicated
+* Return: new char pointer to the new string
 */
-char   *strArrduppp(const char *strArr)
+char   *strduppp(const char *str)
 {
-	char *new_strArr;
+	char *new_str;
 	size_t  len, iterator;
 
-	len = mYstrArrlen(strArr);
-	new_strArr = malloc(sizeof(char) * (len + 1));
-	if (!new_strArr)
+	len = mYstrlen(str);
+	new_str = malloc(sizeof(char) * (len + 1));
+	if (!new_str)
 		return (NULL);
-	new_strArr[len] = 0;
+	new_str[len] = 0;
 	iterator = 0;
 	while (iterator < len)
 	{
-		new_strArr[iterator] = strArr[iterator];
+		new_str[iterator] = str[iterator];
 		iterator++;
 	}
-	return (new_strArr);
+	return (new_str);
 }

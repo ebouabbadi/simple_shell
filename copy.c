@@ -1,13 +1,13 @@
 #include "shell.h"
 /**
- * myCopy - function that copy data into dest
+ * _copy - function that copy data into dest
  *
- * @dest: buffxd in which the data will be copied
- * @src: buffxd source of the characters
+ * @dest: buffer in which the data will be copied
+ * @src: buffer source of the characters
  * @size: length of data that will be copied into line
  * Return: dest
  */
-char *myCopy(char *dest, const char *src, size_t size)
+char *_copy(char *dest, const char *src, size_t size)
 {
 	size_t iter;
 

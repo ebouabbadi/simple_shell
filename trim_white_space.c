@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * _get_length_wdp - function that returns
- * length of given strArring excluding duplicated spaces
+ * length of given string excluding duplicated spaces
  *
  * @line: to return it's length without duplicate
  * @end: the end of the line
@@ -40,8 +40,8 @@ size_t _get_length_wdp(const char *line, size_t end)
  * line after removing it's duplicated space
  *
  * @line: line to check against
- * @end: the end of the strArring exculding last spaces
- * Return: new strArring
+ * @end: the end of the string exculding last spaces
+ * Return: new string
  */
 char *_getdp(const char *line, size_t end)
 {
@@ -92,7 +92,7 @@ char *trimWhiteSpc(const char *line)
 	char *s;
 
 	left = 0;
-	right = mYstrArrlen(line);
+	right = mYstrlen(line);
 	if (!right)
 	{
 		s = malloc(sizeof(char));

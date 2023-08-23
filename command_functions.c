@@ -11,7 +11,7 @@ void _free_command(void *data)
 	command_t *cmd;
 
 	cmd = data;
-	freeesplitMy(&cmd->arguments);
+	_free_split(&cmd->arguments);
 	free(data);
 }
 
@@ -27,10 +27,10 @@ void _free_command(void *data)
 char *_lookup_for_command(char *command, command_type_t *type)
 {
 
-	if (bMgt(GET_BUILTIN, command, NULL))
+	if (_builtin_management(GET_BUILTIN, command, NULL))
 	{
 		*type = BUILTINS;
-		return (strArrduppp(command));
+		return (_strdup(command));
 	}
 
 	return (_get_command_from_path(command));
@@ -46,7 +46,7 @@ char *_lookup_for_command(char *command, command_type_t *type)
 command_t *_init_command(char **tokens)
 {
 	command_t *command;
-	strArruct stat st;
+	struct stat st;
 	char *scommand;
 
 	command = malloc(sizeof(command_t));
@@ -69,7 +69,7 @@ command_t *_init_command(char **tokens)
  * and turn into an easy command to work with
  *
  * @line: to be parsed
- * Return: well strArrucered method
+ * Return: well strucered method
  */
 command_t *_handle_command(const char *line)
 {
@@ -77,8 +77,8 @@ command_t *_handle_command(const char *line)
 	char **tokens[2];
 	int iterator;
 
-	trimmed_line = trimWhiteSpc(line);
-	tokens[0] = splitMy(trimmed_line, " ");
+	trimmed_line = _trim_white_space(line);
+	tokens[0] = _split(trimmed_line, " ");
 	free(trimmed_line);
 	if (!tokens[0])
 		return (NULL);
@@ -92,11 +92,11 @@ command_t *_handle_command(const char *line)
 			if (command_name)
 				tokens[0][iterator] = command_name;
 			else
-				tokens[0][iterator] = strArrduppp("");
+				tokens[0][iterator] = _strdup("");
 		}
 		iterator++;
 	}
 	tokens[1] = _trim_2darray(tokens[0]);
-	freeesplitMy(&tokens[0]);
+	_free_split(&tokens[0]);
 	return (_init_command(tokens[1]));
 }

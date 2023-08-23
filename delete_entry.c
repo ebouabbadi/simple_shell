@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * deleteEntry - function that removes
+ * _delete_entry - function that removes
  * entry from hashmap by given key index
  *
  * @map: map to delete entry from
- * @key: strArring key of the entry
+ * @key: string key of the entry
  * Return: (0) success, (1) error
  */
-int deleteEntry(map_t *map, const char *key)
+int _delete_entry(map_t *map, const char *key)
 {
 	list_t *list, *tmp;
 	int backet_index;
@@ -19,21 +19,21 @@ int deleteEntry(map_t *map, const char *key)
 	if (!list)
 		return (0);
 	entry = list->data;
-	if (mystrArrcmp(entry->key, key))
+	if (_strcmp(entry->key, key))
 	{
 		map->backets[backet_index] = list->next;
-		clearEntryy(list->data);
+		_clear_entry(list->data);
 		free(list);
 		return (0);
 	}
 	while (list->next)
 	{
 		entry = list->next->data;
-		if (mystrArrcmp(entry->key, key))
+		if (_strcmp(entry->key, key))
 		{
 			tmp = list->next;
 			list->next = list->next->next;
-			clearEntryy(tmp->data);
+			_clear_entry(tmp->data);
 			free(tmp);
 			break;
 		}

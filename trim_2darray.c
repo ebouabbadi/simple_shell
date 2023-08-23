@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * _count_non_empty_strArring - function that counts
- * number of non empty strArring inside of 2d array
+ * _count_non_empty_string - function that counts
+ * number of non empty string inside of 2d array
  *
  * @arr: 2d array to lookup for number of non empty
- * strArring
- * Return: number of non empty strArrings
+ * string
+ * Return: number of non empty strings
  */
-int _count_non_empty_strArring(char **arr)
+int _count_non_empty_string(char **arr)
 {
 	int len;
 
@@ -23,18 +23,18 @@ int _count_non_empty_strArring(char **arr)
 
 /**
  * _trim_2darray - function takes an array
- * and return new one with no empty strArring
+ * and return new one with no empty string
  *
- * @arr: 2d array to remove non empty strArrings
+ * @arr: 2d array to remove non empty strings
  * from it
- * Return: 2d array without empty strArrings
+ * Return: 2d array without empty strings
  */
 char **_trim_2darray(char **arr)
 {
 	int len;
 	char **new_arr;
 
-	len = _count_non_empty_strArring(arr);
+	len = _count_non_empty_string(arr);
 	new_arr = malloc(sizeof(char *) * (len + 1));
 	if (!new_arr)
 		return (NULL);
@@ -44,7 +44,7 @@ char **_trim_2darray(char **arr)
 	{
 		if (**arr)
 		{
-			new_arr[len] = strArrduppp(*arr);
+			new_arr[len] = _strdup(*arr);
 			len++;
 		}
 		arr++;

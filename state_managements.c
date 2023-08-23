@@ -26,9 +26,9 @@ int statusMgt(status_actions_t action, int new_status)
  * map
  *
  * @action: action that will be applied to our env
- * @key: strArring used when adding new entry or when
+ * @key: string used when adding new entry or when
  * retrieving data
- * @value: strArring used when adding new entry
+ * @value: string used when adding new entry
  * Return: different types based on the given action
  */
 void *envMgt(enviroment_action_t action,
@@ -41,7 +41,7 @@ void *envMgt(enviroment_action_t action,
 	else if (action == SET_ENTRY)
 		setValue(map, key, value);
 	else if (action == GET_VALUE)
-		return (strArrduppp(getValue(map, key)));
+		return (strduppp(getValue(map, key)));
 	else if (action == GET_KEYS)
 		return (getKey(map));
 	else if (action == CONVERT_INTO_2D)
@@ -77,14 +77,14 @@ builtins_t bMgt(builtin_actions_t action, char *name,
 		iter = 0;
 		while (iter < size)
 		{
-			if (mystrArrcmp(builtins[iter].name, name))
+			if (myStrcmp(builtins[iter].name, name))
 				return (builtins[iter].function);
 			iter++;
 		}
 	}
 	if (action == SET_BUILTIN)
 	{
-		myCopy(builtins[size].name, name, mYstrArrlen(name));
+		myCopy(builtins[size].name, name, mYstrlen(name));
 		builtins[size].function = function;
 		size++;
 	}
@@ -92,16 +92,16 @@ builtins_t bMgt(builtin_actions_t action, char *name,
 }
 
 /**
- * globalistNodeates - state management that holds
+ * globalStates - state management that holds
  * some variables that will be used in different
  * places of the applications
  *
  * @action: actions that will be applied to
  * the globals state managements
- * @s: strArring to update strArring
+ * @s: string to update string
  * Return: (void *)
  */
-void *globalistNodeates(globals_action_t action, char **s)
+void *globalStates(globals_action_t action, char **s)
 {
 	static char *line, *shell_name, **array_2d;
 	static int line_number;

@@ -33,6 +33,6 @@ int setValue(map_t *map, const char *key, const char *value)
 		return (0);
 	entry->key = strArrduppp(key);
 	entry->value = strArrduppp(value);
-	addToLst(&map->backets[backet_index], entry);
+	add_to_list(&map->backets[backet_index], entry);
 	return (1);
 }

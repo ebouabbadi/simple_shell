@@ -19,7 +19,7 @@ int _env(command_t *command)
 		return (1);
 	while (*iterator)
 	{
-		myFprint(1, "%s\n", *iterator);
+		_fprint(1, "%s\n", *iterator);
 		iterator++;
 	}
 	return (0);

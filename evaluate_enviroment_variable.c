@@ -14,13 +14,13 @@ char *_evaluate_enviroment_variable(char *env_key)
 	char *value;
 	int number;
 
-	if (mystrArrcmp(env_key, "?"))
+	if (_strcmp(env_key, "?"))
 	{
-		number = statusMgt(GET_STATUS, 0);
+		number = _status_management(GET_STATUS, 0);
 		return (_itoa(number));
 	}
-	if (mystrArrcmp(env_key, "$"))
+	if (_strcmp(env_key, "$"))
 		return (_itoa(getpid()));
-	value = envMgt(GET_VALUE, env_key, NULL);
+	value = _enviroment_management(GET_VALUE, env_key, NULL);
 	return (value);
 }

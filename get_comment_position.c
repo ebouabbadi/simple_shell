@@ -5,7 +5,7 @@
  * position of the # or the length of the line
  * if # not found
  *
- * @line: strArring to lookup in
+ * @line: string to lookup in
  * Return: (integer) position of the #
  * or the length if not found
  */

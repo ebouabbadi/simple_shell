@@ -51,21 +51,21 @@ int _fput_number(int fd, int number)
 }
 
 /**
- * _fputs - function that prints strArring
+ * _fputs - function that prints string
  * into given file descriptor
  *
  * @fd: file descriptor
- * @s: strArring to be printed
+ * @s: string to be printed
  * Return: number of character printed
  */
 int _fputs(int fd, const char *s)
 {
-	return (write(fd, s, mYstrArrlen(s)));
+	return (write(fd, s, mYstrlen(s)));
 }
 
 /**
- * myFprint - function that allows to
- * to print number and strArring using
+ * _fprint - function that allows to
+ * to print number and string using
  * format specifiers
  *
  *
@@ -74,7 +74,7 @@ int _fputs(int fd, const char *s)
  * and change place holder to specific values
  * Return: number of printed characters
  */
-int myFprint(int fd, const char *format, ...)
+int _fprint(int fd, const char *format, ...)
 {
 	va_list ap;
 	int index, printed;

@@ -1,30 +1,30 @@
 #include "shell.h"
 
 /**
- * myAtoi - function that convert
- * strArring into integer
+ * _atoi - function that convert
+ * string into integer
  *
- * @strArr: to be converted
+ * @str: to be converted
  * Return: converted integer
  */
-int myAtoi(const char *strArr)
+int _atoi(const char *str)
 {
 	int number;
 	int sign;
 
 	sign = 1;
 	number = 0;
-	if (*strArr == '-')
+	if (*str == '-')
 	{
 		sign = -1;
-		strArr++;
+		str++;
 	}
-	if (*strArr == '+')
-		strArr++;
-	while (*strArr)
+	if (*str == '+')
+		str++;
+	while (*str)
 	{
-		number = number * 10 + (*strArr - 48);
-		strArr++;
+		number = number * 10 + (*str - 48);
+		str++;
 	}
 	return (number * sign);
 }

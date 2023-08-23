@@ -19,8 +19,8 @@ int main(int ac, char *av[])
 	bMgt(SET_BUILTIN, "env", _env);
 	bMgt(SET_BUILTIN, "setenv", _setenv);
 	bMgt(SET_BUILTIN, "unsetenv", _unsetenv);
-	bMgt(SET_BUILTIN, "cd", myCd);
-	globalistNodeates(SET_SHELL_NAME, &av[0]);
+	bMgt(SET_BUILTIN, "cd", _cd);
+	globalStates(SET_SHELL_NAME, &av[0]);
 	while (true)
 	{
 		ppt();
@@ -36,8 +36,8 @@ int main(int ac, char *av[])
 		no_comment_line = excludeComt(line);
 		free(line);
 		line = no_comment_line;
-		globalistNodeates(SET_LINE, &line);
-		globalistNodeates(INCREMENT_LINE_NUMBER, NULL);
+		globalStates(SET_LINE, &line);
+		globalStates(INCREMENT_LINE_NUMBER, NULL);
 		seminHandler(line);
 		free(line);
 	}

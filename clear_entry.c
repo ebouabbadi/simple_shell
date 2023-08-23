@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * clearEntryy - frees the memory hash table.
+ * _clear_entry - frees the memory allocated for an entry in the hash table.
  *
  * @data :  entry data
  *
  * Return: nothing
  */
-void clearEntryy(void *data)
+void _clear_entry(void *data)
 {
 	entry_t *entry;
 

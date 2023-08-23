@@ -1,36 +1,36 @@
 #include "shell.h"
 
 /**
- * mYrealloc - function that takes buffxd and increase it's size
+ * mYrealloc - function that takes buffer and increase it's size
  *
- * @old_buffxd: old data of the buffxd
- * @old_size: size of the buffxd before update
- * @new_size: size of the buffxd after
- * Return: buffxd after it's being allocated, NULL in error
+ * @old_buffer: old data of the buffer
+ * @old_size: size of the buffer before update
+ * @new_size: size of the buffer after
+ * Return: buffer after it's being allocated, NULL in error
  */
-void *mYrealloc(void *old_buffxd, size_t old_size, size_t new_size)
+void *mYrealloc(void *old_buffer, size_t old_size, size_t new_size)
 {
-	unsigned char *buffxd;
-	unsigned char *char_buffxd;
+	unsigned char *buffer;
+	unsigned char *char_buffer;
 	size_t iter;
 
-	buffxd = malloc(sizeof(unsigned char) * (new_size + 1));
-	if (!buffxd)
+	buffer = malloc(sizeof(unsigned char) * (new_size + 1));
+	if (!buffer)
 		return (NULL);
-	char_buffxd = old_buffxd;
+	char_buffer = old_buffer;
 	iter = 0;
-	while (char_buffxd && iter < old_size)
+	while (char_buffer && iter < old_size)
 	{
-		buffxd[iter] = char_buffxd[iter];
+		buffer[iter] = char_buffer[iter];
 		iter++;
 	}
 
 	while (iter < new_size)
 	{
-		buffxd[iter] = 0;
+		buffer[iter] = 0;
 		iter++;
 	}
-	buffxd[iter] = 0;
-	free(old_buffxd);
-	return (buffxd);
+	buffer[iter] = 0;
+	free(old_buffer);
+	return (buffer);
 }

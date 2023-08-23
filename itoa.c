@@ -29,35 +29,35 @@ int _count_number_length(int number)
 
 /**
  * _itoa - function convert number int
- * strArring
+ * string
  *
  * @number: to be converted
- * Return: converted strArring
+ * Return: converted string
  */
 char *_itoa(int number)
 {
 	int len;
-	char *strArr_number;
+	char *str_number;
 
 	len = _count_number_length(number);
-	strArr_number = malloc(sizeof(char) * (len + 1));
-	if (!strArr_number)
+	str_number = malloc(sizeof(char) * (len + 1));
+	if (!str_number)
 		return (NULL);
-	strArr_number[len] = 0;
+	str_number[len] = 0;
 	if (!number)
 	{
-		strArr_number[0] = '0';
-		return (strArr_number);
+		str_number[0] = '0';
+		return (str_number);
 	}
 	if (number < 0)
 	{
-		strArr_number[0] = '-';
+		str_number[0] = '-';
 		number *= -1;
 	}
 	while (number)
 	{
-		strArr_number[--len] = number % 10 + 48;
+		str_number[--len] = number % 10 + 48;
 		number /= 10;
 	}
-	return (strArr_number);
+	return (str_number);
 }
