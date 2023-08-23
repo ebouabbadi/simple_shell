@@ -1,129 +1,235 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "libft.h"
 #include <unistd.h>
-#include <sys/wait.h>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <signal.h>
 #include <dirent.h>
-#include "struct.h"
+#include <stdarg.h>
+#define BUFFER_SIZE 1024
+#define BACKET_SIZE 64
 
-#define SPC ' '
-#define OUTR '>'
-#define APND ">>"
-#define INR '<'
-#define HRDC "<<"
-#define S_QT '\''
-#define D_QT '\"'
-#define SNL ""
-
-enum e_mini
+/**
+ *struct entry_s - struct that hold key and value
+ * of hash table
+ *
+ *@key: the key used to retrieve values
+ *@value: the respective data for the key
+ */
+typedef struct entry_s
 {
-	T_SPACE = 10,
-	T_REDOUT,
-	T_HEREDOC,
-	T_REDINP,
-	T_REDAPND,
-	T_MOT,
-	T_PIPE,
-};
+	char *key;
+	char *value;
+} entry_t;
 
-t_global g_global;
+/**
+ * enum status_actions_e - actions that will be applied to
+ * status state management
+ *
+ * @UPDATE_STATUS: action to update status code
+ * @GET_STATUS: action to retrieve status code
+ */
+typedef enum status_actions_e
+{
+	UPDATE_STATUS,
+	GET_STATUS
+} status_actions_t;
 
-int main(int ac, char **av, char **envp);
+/**
+ * struct list_s - node of linkedlist
+ *
+ * @data: linkedlist content
+ * @next: next node
+ */
+typedef struct list_s
+{
+	void *data;
+	struct list_s *next;
+} list_t;
 
-int redirections(t_mini *lst);
-int verification33(char c);
-void expend_inside_herdoc(int fd, char *inpt);
-void command_make(t_mini *lst, int len);
-t_list *heredoc(t_mini *lst, t_list *node);
-t_list *heredoc_handling(t_list *node, int fd);
-int execution(t_mini **big_stack, t_env **envs);
-char *comd_existe(t_mini *lst);
-void check_if_cmd_builtins_and_run_intside(t_mini *lst, t_env **envs);
-void check_if_cmd_builtins_and_run_outside(t_mini *lst, t_env **envs);
-void wait_and_return_value_of_waitpid(t_mini *lst);
-char *searching_for_cmd(t_mini *lst);
-void ft_pipe(t_mini *lst);
-void close_pipe_in_main_process(t_mini *lst);
-void pipe_control(t_mini *lst);
-char **extract_env(t_env **envs);
-int len_(t_env **envs);
-int lst_size(t_mini **stack);
-void ft_unlink(t_mini **big_stack);
-int if_cmd_in_builtins(t_mini *lst);
-int len__(t_env **envs);
-int if_number2(char *val);
-void add_to_trash(void *ptr);
-char *my_ft_strdup(const char *s1);
-char *my_ft_substr(char const *s, unsigned int start, size_t len);
-void add_to_list_env(t_env *lst, t_env **env);
-void affich_env(t_env **stack);
-t_env **ft_env(char **envp);
-char *search_in_env(t_env **envs, char *variable);
-void creat_env(t_env **stack, char *name, char *val);
-int if_number(char *val);
-void ft_export(t_mini *lst);
-void affich_export(t_env **envs);
-void add_to_env(char *variable, char *valleur, t_env **envs);
-int if_variable_exist(char *variable, char *valleur, int flag, int append);
-int if_not_a_valid_identifier(char *variable);
-char *find_value2(char *cmd);
-char *find_value1(char *cmd);
-void ft_unset(t_env **envs, t_mini *lst);
-void ft_cd(t_env **envs, char **cmd, int size);
-void modif_pwd_in_env(t_env **envs);
-char *search_in_env(t_env **envs, char *variable);
-void modif_oldpwd_in_env(t_env **envs);
-void if_cd_only2(int size, char *str);
-void if_cd_and_argument2(char **cmd, int size, int *flag);
-void if_cd_and_minus3(int size);
-void if_cd_and_minus2(void);
-void home_not_set(void);
-void ft_pwd(void);
-void ft_exit(t_mini *lst);
-void ft_echo(t_mini *lst);
-void fanc_aplic(int status);
-int get_c(void);
-void msg_perror(char *str, int case_);
-void msg_error_exprt_unst(char *str, char *msg);
-void msg_error_cd(char *msg);
-t_mini **parsing(char *line1);
-void line_handling(char *line, t_list **stack);
-int pipe_handling(int i, t_list **stack);
-int dq_handling(int i, t_list **stack, int start, char *line);
-int sq_handling(int i, t_list **stack, int start, char *line);
-int redc_handling(int i, t_list **stack, char *line);
-int space_handlinge(int i, t_list **stack, int start, char *line);
-void ft_lstadd_back(t_list **lst, t_list *new);
-t_list *ft_lstlast(t_list *lst);
-t_list *ft_lstnew(void *content);
-void lst_add_big_stack(t_mini **big_stack, t_list **stack);
-void expend(t_list **stack, t_list **new_stack);
-void tokenization(t_list **stack);
-int ft_strcmp(char *s1, char *s2);
-int check_quote(char *line);
-void cancel_expend(t_list **stack);
-void mark_expend(t_list **stack);
-void ft_add1(t_list **new_stack, t_list *lst);
-void ft_add2(t_list **new_stack, char *str, int token, int flag);
-void free_tab(char **tab);
-void free_stack(t_list **stack, int status);
-void free_and_print(char *line, char *line1);
-void free_big_stack(t_mini **stk);
-int syntax_error(t_list **stack);
-int syntax_error2(t_list **stack, t_list *lst);
-char *expend_sq_dq(t_list *node);
-char *expend_sq_dq_a(char *mot, char *str, int *i, int start);
-char *expend_sq_dq_b(char *mot, char *str, int *i, int start);
-int verification2(char c);
-void *ft_malloc(size_t count, size_t size);
-char *my_ft_strjoin(char const *s1, char const *s2, int flag1, int flag2);
+/**
+ * enum command_type_e - types of command
+ *
+ * @BUILTINS: MEANS THAT COMMAND IS BUILTIN
+ * @EXTERNAL: MEANS IT's AN EXTERNAL COMMAND
+ * @NOT_FOUND: MEANS THAT COMMANS IS NOT FOUND
+ */
+typedef enum command_type_e
+{
+	BUILTINS,
+	EXTERNAL,
+	NOT_FOUND
+} command_type_t;
+/**
+ * struct command_s - struct that holds informations
+ * about command
+ *
+ * @name: name of the command
+ * @arguments: command arguments
+ * @type: type of the command
+ */
+typedef struct command_s
+{
+	char *name;
+	char **arguments;
+	command_type_t type;
+} command_t;
+/**
+ * struct builtin_s - builtin struct
+ * that will contain name of builtins
+ * and it respective function to be
+ * executed
+ *
+ * @name: builtin name
+ * @function: builtin function
+ *
+ */
+typedef struct builtin_s
+{
+	char name[30];
+	int (*function)(command_t *command);
+} builtin_t;
 
+/**
+ * enum builtin_actions_e - builtin actions
+ *
+ * @GET_BUILTIN: action to get builtin function
+ * @SET_BUILTIN: action to add new_buitin function
+ */
+typedef enum builtin_actions_e
+{
+	GET_BUILTIN,
+	SET_BUILTIN
+} builtin_actions_t;
+/**
+ * struct map_s - defines a structure for a hash table
+ *
+ * @backets: an array of linkedlist where
+ * our entry data will be stored
+ */
+typedef struct map_s
+{
+	list_t *backets[BACKET_SIZE];
+} map_t;
+
+/**
+ * enum enviroment_action_e - actions that will be applied to
+ * global enviroment
+ *
+ * @INIT_ENV: TO INITIALIZE ENVIROMENT VARIABLE
+ * @SET_ENTRY: TO ADD NEW ENTRY TO ENVIROMENT VARIABLE
+ * @GET_VALUE: TO RETRIEVE VALUE FROM ENVIROMENT VARIABLE
+ * @GET_KEYS: TO GET ALL KEY THAT STORED INSIDE ENV VARIABLE
+ * @CONVERT_INTO_2D: RETURNS 2D ARRAY CONTAINING ALL ENVIRONEMENT
+ * VARIBALES (env)
+ * @CLEAR_ENV: TO FREE AND CLEAR EVERYTHING INSIDE OF OUR
+ * @DELETE_ENTRY: USED TO DELETE ENTRY FROM ENVIROMENT VARIABLE
+ * ENV
+ */
+typedef enum enviroment_action_e
+{
+	INIT_ENV,
+	SET_ENTRY,
+	GET_VALUE,
+	GET_KEYS,
+	DELETE_ENTRY,
+	CONVERT_INTO_2D,
+	CLEAR_ENV
+} enviroment_action_t;
+
+/**
+ * enum globals_action_e - actions to be applied to
+ * some global states or variables
+ *
+ * @GET_LINE: action that allows to
+ * get line
+ * @GET_LINE_NUMBER: action that allows to get
+ * current line number
+ * @GET_SHELL_NAME: action that allows us to
+ * get shell name
+ * @SET_LINE: action that allow us to the line
+ * @SET_SHELL_NAME: action allow us to set
+ * shell name
+ * @INCREMENT_LINE_NUMBER: action to increment
+ * line number by one
+ * @SET_2D: action that set 2d array
+ * @GET_2D: action that get 2d array
+ */
+typedef enum globals_action_e
+{
+	GET_LINE,
+	GET_LINE_NUMBER,
+	GET_SHELL_NAME,
+	SET_LINE,
+	SET_SHELL_NAME,
+	INCREMENT_LINE_NUMBER,
+	SET_2D,
+	GET_2D
+} globals_action_t;
+
+typedef int (*builtins_t)(command_t *);
+
+char *_copy(char *dest, const char *src, size_t size);
+void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
+ssize_t _getline(char **line);
+char *_trim_white_space(const char *line);
+int _parsing_error_handler(char *line);
+size_t _strlen(const char *s);
+void _free_split(char ***backets);
+char **_split(const char *line, const char *diameter);
+list_t *add_to_list(list_t **lst, void *data);
+void *pop_from_list(list_t **list);
+size_t _listlen(const list_t *list);
+void free_list(list_t *list, void (*free_content)(void *data));
+int _strcmp(const char *str1, const char *str2);
+char *_strdup(const char *str);
+int _get_hash_code(const char *key);
+map_t *_init_map(void);
+int _set_value(map_t *map, const char *key, const char *value);
+char *_get_value(const map_t *map, const char *key);
+void _clear_entry(void *data);
+void _clear_map(map_t *map);
+list_t *_get_keys(const map_t *map);
+int _delete_entry(map_t *map, const char *key);
+command_t *_init_command(char **tokens);
+void _free_command(void *data);
+command_t *_handle_command(const char *line);
+int _semicolon_handler(const char *line);
+list_t *_pipe_handler(const char *line);
+int _handle_pipe_execution(list_t *pipes, int previous_stdin);
+int _status_management(status_actions_t action, int new_status);
+void _handle_sigint(int sig);
+void *_enviroment_management(enviroment_action_t action,
+							 const char *key, const char *value);
+int _status_management(status_actions_t action, int new_status);
+char **_convert_env_into_2d_array(void);
+void _feed_enviroment_variable(char **new_env);
+char *_get_command_from_path(char *command);
+char *_strslice(const char *line, int start, int end);
+char *_strcat(const char *str1, const char *str2);
+char *_itoa(int number);
+char *_evaluate_enviroment_variable(char *env_key);
+char **_trim_2darray(char **arr);
+int _env(command_t *command);
+int _isdigit(const char *s);
+int _str2dlen(char **arr2d);
+int _atoi(const char *str);
+int __exit(command_t *command);
+builtins_t _builtin_management(builtin_actions_t action, char *name,
+							   int (*function)(command_t *command));
+void _excute(command_t *command);
+int _setenv(command_t *command);
+int _unsetenv(command_t *command);
+int _fprint(int fd, const char *format, ...);
+void *_global_states(globals_action_t action, char **s);
+int _cd(command_t *command);
+void _handle_sigint(int sig);
+void _prompt(void);
+int _get_comment_position(const char *line);
+char *_exclude_comment(const char *line);
 #endif
