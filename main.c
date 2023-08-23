@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 00:13:00 by ebouabba          #+#    #+#             */
-/*   Updated: 2023/08/23 23:17:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/23 23:29:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/shell.h"
+#include "shell.h"
 
 int	init_variable_global(int status)
 {
