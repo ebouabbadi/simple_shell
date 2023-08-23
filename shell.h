@@ -197,7 +197,7 @@ void clearMap(map_t *map);
 list_t *getKey(const map_t *map);
 int deleteEntry(map_t *map, const char *key);
 cmdxd_t *_init_cmdxd(char **tokens);
-void freeCmdxd(void *data);
+void _free_cmdxd(void *data);
 cmdxd_t *_handle_cmdxd(const char *line);
 int seminHandler(const char *line);
 list_t *_pipe_handler(const char *line);

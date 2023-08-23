@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * freeCmdxd - function that frees cmdxd
+ * _free_cmdxd - function that frees cmdxd
  *
  * @data: data to be freed
  * Return: Nothing
  */
-void freeCmdxd(void *data)
+void _free_cmdxd(void *data)
 {
 	cmdxd_t *cmd;
 

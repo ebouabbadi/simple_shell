@@ -62,7 +62,7 @@ int seminHandler(const char *line)
 		argument_length = stringArr2dlenn(cmdxd->arguments);
 		envMgt(SET_ENTRY, "_",
 							   cmdxd->arguments[argument_length - 1]);
-		freeCmdxd(cmdxd);
+		_free_cmdxd(cmdxd);
 		iterator++;
 	}
 	freeesplitMy(&semi_cmdxds);

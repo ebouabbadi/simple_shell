@@ -32,7 +32,7 @@ void _excute(cmdxd_t *cmdxd)
 		}
 		else
 			perror(globalistNodeates(GET_SHELL_NAME, NULL));
-		freeCmdxd(cmdxd);
+		_free_cmdxd(cmdxd);
 		free(globalistNodeates(GET_LINE, NULL));
 		envMgt(CLEAR_ENV, NULL, NULL);
 		_exit(err);

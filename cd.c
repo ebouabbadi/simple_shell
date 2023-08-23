@@ -50,33 +50,33 @@ int cdHelper2(const char *path)
 /**
  * myCd - builtin function cd
  *  is a function that allows as
- * to navigate through
+ * to navigate through out different
  * folders (directories) in our operating
  * system
  *
- * @cmdxd: strArruct
- * about passed cmd
+ * @command: strArruct the stores information
+ * about passed commands
  * Return: (0) success otherwise errors
  */
-int myCd(cmdxd_t *cmdxd)
+int myCd(command_t *command)
 {
 	int len;
 
-	len = stringArr2dlenn(cmdxd->arguments + 1);
+	len = _strArr2dlen(command->arguments + 1);
 
 	if (len >= 1)
 	{
-		if (mystrArrcmp("-", cmdxd->arguments[1]))
+		if (mystrArrcmp("-", command->arguments[1]))
 		{
 			return (cdHelper("OLDPWD"));
 		}
-		else if (mystrArrcmp("~", cmdxd->arguments[1]))
+		else if (mystrArrcmp("~", command->arguments[1]))
 		{
 			return (cdHelper("HOME"));
 		}
 		else
 		{
-			return (cdHelper2(cmdxd->arguments[1]));
+			return (cdHelper2(command->arguments[1]));
 		}
 	}
 	else if (!len)

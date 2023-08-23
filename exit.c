@@ -31,11 +31,11 @@ int __exit(cmdxd_t *cmdxd)
 		freeesplitMy(&iterator);
 		if (!len)
 		{
-			freeCmdxd(cmdxd);
+			_free_cmdxd(cmdxd);
 			_exit(statusMgt(GET_STATUS, 0));
 		}
 		len = myAtoi(cmdxd->arguments[1]);
-		freeCmdxd(cmdxd);
+		_free_cmdxd(cmdxd);
 		_exit(len);
 	}
 	return (0);
