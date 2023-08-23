@@ -1,2 +1,0 @@
-/bin/ls -la | /bin/cat
-/bin/echo hello wolrd
