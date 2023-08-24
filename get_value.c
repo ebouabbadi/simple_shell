@@ -8,13 +8,13 @@
  *@key: key to retieve the associated value
  * Return: pointer to the value or NULL in error
  */
-char  *_get_value(const map_t *map, const char *key)
+char *_get_value(const map_t *map, const char *key)
 {
-	int    backet_index;
-	list_t  *backet;
-	entry_t  *entry;
+	int backet_index;
+	list_t *backet;
+	entry_t *entry;
 
-	backet_index = _get_hash_code(key);
+	backet_index = hachcode(key);
 	backet = map->backets[backet_index];
 	while (backet)
 	{

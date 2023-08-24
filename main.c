@@ -21,7 +21,7 @@ int main(int ac, char *av[])
 	bMt(SET_BUILTIN, "unsetenv", _unsetenv);
 	bMt(SET_BUILTIN, "cd", _cd);
 	globalStatus(SET_SHELL_NAME, &av[0]);
-	while (true)
+	while (1)
 	{
 		pmt();
 		myGetline(&line);

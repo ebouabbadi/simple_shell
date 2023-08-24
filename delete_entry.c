@@ -1,20 +1,20 @@
 #include "shell.h"
 
 /**
- * _delete_entry - function that removes
+ * deleteEntry - function that removes
  * entry from hashmap by given key index
  *
  * @map: map to delete entry from
  * @key: string key of the entry
  * Return: (0) success, (1) error
  */
-int _delete_entry(map_t *map, const char *key)
+int deleteEntry(map_t *map, const char *key)
 {
 	list_t *list, *tmp;
 	int backet_index;
 	entry_t *entry;
 
-	backet_index = _get_hash_code(key);
+	backet_index = hachcode(key);
 	list = map->backets[backet_index];
 	if (!list)
 		return (0);

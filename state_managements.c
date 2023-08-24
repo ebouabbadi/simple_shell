@@ -37,19 +37,19 @@ void *envimat(enviroment_action_t action,
 	static map_t *map;
 
 	if (action == INIT_ENV)
-		map = _init_map();
+		map = initMp();
 	else if (action == SET_ENTRY)
-		_set_value(map, key, value);
+		valueSet(map, key, value);
 	else if (action == GET_VALUE)
 		return (_strdup(_get_value(map, key)));
 	else if (action == GET_KEYS)
 		return (_get_keys(map));
 	else if (action == CONVERT_INTO_2D)
-		return (_convert_env_into_2d_array());
+		return (convert2darry());
 	else if (action == CLEAR_ENV)
-		_clear_map(map);
+		clearMp(map);
 	else if (action == DELETE_ENTRY)
-		_delete_entry(map, key);
+		deleteEntry(map, key);
 	return (NULL);
 }
 

@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- *  _convert_env_into_2d_array - function that turns
+ *  convert2darry - function that turns
  * env into array 2d
  *
  * Return: array 2d or NULL signifying error
  */
-char **_convert_env_into_2d_array(void)
+char **convert2darry(void)
 {
 	list_t *keys, *iterator;
 	size_t len_iter;

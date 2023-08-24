@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _set_value - adds or updates a new entry
+ * valueSet - adds or updates a new entry
  * to the hash table with the given key and value.
  *
  *@map: map to add new entry to it
@@ -9,13 +9,13 @@
  *@value: string implies to value of the entry
  *Return: 0 on error, 1 success
  */
-int _set_value(map_t *map, const char *key, const char *value)
+int valueSet(map_t *map, const char *key, const char *value)
 {
 	int backet_index;
 	list_t *iterator;
 	entry_t *entry;
 
-	backet_index = _get_hash_code(key);
+	backet_index = hachcode(key);
 	iterator = map->backets[backet_index];
 	while (iterator)
 	{
