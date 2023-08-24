@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _strslice - function that  take string
+ * stlinstttt - function that  take string
  * and return specified part of it
  *
  * @line: to be sliced
@@ -9,7 +9,7 @@
  * @end: end position index zero based(excluded)
  * Return: part of the string
  */
-char *_strslice(const char *line, int start, int end)
+char *stlinstttt(const char *line, int start, int end)
 {
 	char *slice;
 	int len, iter;

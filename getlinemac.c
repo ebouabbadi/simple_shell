@@ -1,39 +1,39 @@
 #include "shell.h"
 
 /**
- * _get_command_from_path - function that takes command
+ * pathFromCmd - function  takes cmd
  * and return it's corresponding path
  *
- * @command: command to lookup for it's path
- * Return: path where command located
+ * @cmd: cmd to lookup for it's path
+ * Return: path where  located
  */
-char *_get_command_from_path(char *command)
+char *pathFromCmd(char *cmd)
 {
-	char *proper_command, *path,
+	char *lagala, *path,
 		**path_2d, **iterator;
 	struct stat st;
 
-	if ((command[0] == '.' || command[0] == '/') &&
-		!stat(command, &st))
-		return (_strdup(command));
+	if ((cmd[0] == '.' || cmd[0] == '/') &&
+		!stat(cmd, &st))
+		return (_strdup(cmd));
 	path = envimat(GET_VALUE, "PATH", NULL);
 	if (!path)
-		return (_strdup(command));
+		return (_strdup(cmd));
 	iterator = path_2d = _split(path, ":");
 	free(path);
 	while (*iterator)
 	{
 		path = _strcat(*iterator, "/");
-		proper_command = _strcat(path, command);
+		lagala = _strcat(path, cmd);
 		free(path);
-		if (!stat(proper_command, &st))
+		if (!stat(lagala, &st))
 		{
 			_free_split(&path_2d);
-			return (proper_command);
+			return (lagala);
 		}
-		free(proper_command);
+		free(lagala);
 		iterator++;
 	}
 	_free_split(&path_2d);
-	return (_strdup(command));
+	return (_strdup(cmd));
 }

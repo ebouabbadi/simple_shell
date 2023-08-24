@@ -1,16 +1,16 @@
 #include "shell.h"
 
 /**
- * _check_invalid_characters_occurance - function that check
+ * check_in - function that check
  * given line against invalid characters
  *
  * @line: to lookup for invalid characters
  * Return: 1 if  invalid character found otherwise 0
  */
-int _check_invalid_characters_occurance(char *line)
+int check_in(char *line)
 {
 	size_t index, iter, iter2;
-	char *invalid_characters[] = {
+	char *invChar[] = {
 		";;",
 		"|||",
 		">>>",
@@ -21,8 +21,8 @@ int _check_invalid_characters_occurance(char *line)
 	{
 		iter = 0;
 		iter2 = 0;
-		while (line[iter2] && invalid_characters[index][iter] &&
-			   (invalid_characters[index][iter] == line[iter2] || line[iter2] == ' '))
+		while (line[iter2] && invChar[index][iter] &&
+			   (invChar[index][iter] == line[iter2] || line[iter2] == ' '))
 		{
 			if (line[iter2] == ' ')
 				iter2++;
@@ -32,7 +32,7 @@ int _check_invalid_characters_occurance(char *line)
 				iter++;
 			}
 		}
-		if (!invalid_characters[index][iter])
+		if (!invChar[index][iter])
 			return (1);
 		index++;
 	}
@@ -60,7 +60,7 @@ int _parsing_error_handler(char *line)
 	len = 0;
 	while (line[len])
 	{
-		if (_check_invalid_characters_occurance(line + len))
+		if (check_in(line + len))
 			return (2);
 		len++;
 	}

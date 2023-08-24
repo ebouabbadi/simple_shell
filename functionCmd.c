@@ -33,7 +33,7 @@ char *_looknd(char *command, command_type_t *type)
 		return (_strdup(command));
 	}
 
-	return (_get_command_from_path(command));
+	return (pathFromCmd(command));
 }
 /**
  * _inigf - function that initialize our

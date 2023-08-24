@@ -209,8 +209,8 @@ void *envimat(enviroment_action_t action,
 int statusmt(status_actions_t action, int new_status);
 char **convert2darry(void);
 void feedEnv(char **new_env);
-char *_get_command_from_path(char *command);
-char *_strslice(const char *line, int start, int end);
+char *pathFromCmd(char *command);
+char *stlinstttt(const char *line, int start, int end);
 char *_strcat(const char *str1, const char *str2);
 char *_itoa(int number);
 char *_evaluate_enviroment_variable(char *env_key);
@@ -230,6 +230,6 @@ void *globalStatus(globals_action_t action, char **s);
 int _cd(command_t *command);
 void _handle_sigint(int sig);
 void pmt(void);
-int _get_comment_position(const char *line);
+int positionGet(const char *line);
 char *exclct(const char *line);
 #endif
