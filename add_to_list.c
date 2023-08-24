@@ -6,7 +6,7 @@
  * @data: Ptr  to be stored.
  * Return: Ptr to newly added node.
  */
-list_t *addToLst(list_t **listNode, void *data)
+list_t *add_to_list(list_t **listNode, void *data)
 {
 	list_t *new_node = (list_t *)malloc(sizeof(list_t));
 	list_t *current;
