@@ -33,6 +33,6 @@ int valueSet(map_t *map, const char *key, const char *value)
 		return (0);
 	entry->key = _strdup(key);
 	entry->value = _strdup(value);
-	add_to_list(&map->backets[backet_index], entry);
+	addTolist(&map->backets[backet_index], entry);
 	return (1);
 }

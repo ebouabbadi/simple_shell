@@ -182,7 +182,7 @@ int _parsing_error_handler(char *line);
 size_t _strlen(const char *s);
 void _free_split(char ***backets);
 char **_split(const char *line, const char *diameter);
-list_t *add_to_list(list_t **lst, void *data);
+list_t *addTolist(list_t **lst, void *data);
 void *pop_from_list(list_t **list);
 size_t _listlen(const list_t *list);
 void free_list(list_t *list, void (*free_content)(void *data));

@@ -20,7 +20,7 @@ list_t    *_get_keys(const map_t *map)
 		while (iterator)
 		{
 			entry = iterator->data;
-			add_to_list(&list, _strdup(entry->key));
+			addTolist(&list, _strdup(entry->key));
 			iterator = iterator->next;
 		}
 		iter++;
