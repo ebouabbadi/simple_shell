@@ -9,7 +9,7 @@
  */
 int main(int ac, char *av[])
 {
-	char *line, *no_comment_line;
+	char *line, *ncmdLine;
 
 	(void)ac;
 	signal(SIGINT, _handle_sigint);
@@ -21,7 +21,7 @@ int main(int ac, char *av[])
 	bMt(SET_BUILTIN, "unsetenv", _unsetenv);
 	bMt(SET_BUILTIN, "cd", _cd);
 	globalStatus(SET_SHELL_NAME, &av[0]);
-	while (1)
+	while (true)
 	{
 		pmt();
 		myGetline(&line);
@@ -30,12 +30,12 @@ int main(int ac, char *av[])
 			free(line);
 			break;
 		}
-		no_comment_line = trimspace(line);
+		ncmdLine = trimspace(line);
 		free(line);
-		line = no_comment_line;
-		no_comment_line = exclct(line);
+		line = ncmdLine;
+		ncmdLine = exclct(line);
 		free(line);
-		line = no_comment_line;
+		line = ncmdLine;
 		globalStatus(SET_LINE, &line);
 		globalStatus(INCREMENT_LINE_NUMBER, NULL);
 		semichr(line);
