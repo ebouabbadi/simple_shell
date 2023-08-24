@@ -40,7 +40,7 @@ int semichr(const char *line)
 		return (1);
 	while (*iterator)
 	{
-		command = _handle_command(*iterator);
+		command = handlcmd(*iterator);
 		if (command->type == NOT_FOUND)
 		{
 			_fprint(2, "%s: %d: %s: not found\n",
@@ -62,7 +62,7 @@ int semichr(const char *line)
 		argument_length = _str2dlen(command->arguments);
 		envimat(SET_ENTRY, "_",
 				command->arguments[argument_length - 1]);
-		_free_command(command);
+		freeCmd(command);
 		iterator++;
 	}
 	_free_split(&semi_commands);

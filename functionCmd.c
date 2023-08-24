@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * _free_command - function that frees command
+ * freeCmd - function
  *
  * @data: data to be freed
  * Return: Nothing
  */
-void _free_command(void *data)
+void freeCmd(void *data)
 {
 	command_t *cmd;
 
@@ -16,7 +16,7 @@ void _free_command(void *data)
 }
 
 /**
- * _lookup_for_command - function that search
+ * _looknd - function that search
  * for given command on the builtins
  * as well as in the path
  *
@@ -24,7 +24,7 @@ void _free_command(void *data)
  * @type: the type of the command
  * Return: proper path or command if it's builtin
  */
-char *_lookup_for_command(char *command, command_type_t *type)
+char *_looknd(char *command, command_type_t *type)
 {
 
 	if (bMt(GET_BUILTIN, command, NULL))
@@ -36,14 +36,14 @@ char *_lookup_for_command(char *command, command_type_t *type)
 	return (_get_command_from_path(command));
 }
 /**
- * _init_command - function that initialize our
+ * _inigf - function that initialize our
  * command
  *
  * @tokens: 2d array holds all command arguments
  * and it contain command name in the first argument
  * Return: allocated command
  */
-command_t *_init_command(char **tokens)
+command_t *_inigf(char **tokens)
 {
 	command_t *command;
 	struct stat st;
@@ -53,7 +53,7 @@ command_t *_init_command(char **tokens)
 	if (!command)
 		return (NULL);
 	command->type = NOT_FOUND;
-	scommand = _lookup_for_command(tokens[0], &command->type);
+	scommand = _looknd(tokens[0], &command->type);
 	free(tokens[0]);
 	tokens[0] = scommand;
 	if (command->type == NOT_FOUND &&
@@ -65,21 +65,21 @@ command_t *_init_command(char **tokens)
 	return (command);
 }
 /**
- * _handle_command - function that takes line
+ * handlcmd - function that takes line
  * and turn into an easy command to work with
  *
  * @line: to be parsed
  * Return: well strucered method
  */
-command_t *_handle_command(const char *line)
+command_t *handlcmd(const char *line)
 {
-	char *trimmed_line, *command_name;
+	char *trline, *nCmd;
 	char **tokens[2];
 	int iterator;
 
-	trimmed_line = trimspace(line);
-	tokens[0] = _split(trimmed_line, " ");
-	free(trimmed_line);
+	trline = trimspace(line);
+	tokens[0] = _split(trline, " ");
+	free(trline);
 	if (!tokens[0])
 		return (NULL);
 	iterator = 0;
@@ -87,10 +87,10 @@ command_t *_handle_command(const char *line)
 	{
 		if (tokens[0][iterator][0] == '$')
 		{
-			command_name = _evaluate_enviroment_variable(tokens[0][iterator] + 1);
+			nCmd = _evaluate_enviroment_variable(tokens[0][iterator] + 1);
 			free(tokens[0][iterator]);
-			if (command_name)
-				tokens[0][iterator] = command_name;
+			if (nCmd)
+				tokens[0][iterator] = nCmd;
 			else
 				tokens[0][iterator] = _strdup("");
 		}
@@ -98,5 +98,5 @@ command_t *_handle_command(const char *line)
 	}
 	tokens[1] = _trim_2darray(tokens[0]);
 	_free_split(&tokens[0]);
-	return (_init_command(tokens[1]));
+	return (_inigf(tokens[1]));
 }

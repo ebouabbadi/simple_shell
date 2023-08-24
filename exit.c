@@ -31,11 +31,11 @@ int __exit(command_t *command)
 		_free_split(&iterator);
 		if (!len)
 		{
-			_free_command(command);
+			freeCmd(command);
 			_exit(statusmt(GET_STATUS, 0));
 		}
 		len = _atoi(command->arguments[1]);
-		_free_command(command);
+		freeCmd(command);
 		_exit(len);
 	}
 	return (0);

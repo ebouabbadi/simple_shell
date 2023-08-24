@@ -32,7 +32,7 @@ void _excute(command_t *command)
 		}
 		else
 			perror(globalStatus(GET_SHELL_NAME, NULL));
-		_free_command(command);
+		freeCmd(command);
 		free(globalStatus(GET_LINE, NULL));
 		envimat(CLEAR_ENV, NULL, NULL);
 		_exit(err);
