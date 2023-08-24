@@ -12,13 +12,13 @@ int _unsetenv(command_t *command)
 {
 	int len;
 
-	len = stringArr2dlenn(command->arguments);
+	len = _str2dlen(command->arguments);
 	if (len != 2)
 	{
-		myFprint(2, "%s: Invalid number of arguments\n",
-				 globalistNodeates(GET_SHELL_NAME, NULL));
+		_fprint(2, "%s: Invalid number of arguments\n",
+				_global_states(GET_SHELL_NAME, NULL));
 		return (1);
 	}
-	envMgt(DELETE_ENTRY, command->arguments[1], NULL);
+	_enviroment_management(DELETE_ENTRY, command->arguments[1], NULL);
 	return (0);
 }
