@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * statusmt - status state management is function that
- * allows to access and apply actions to our status globaly
+ * statusmt - state management is function that
+ * allows to access and applyour status globaly
  * from any function
  *
  * @action: action that will be applied to our state
- * @new_status: used when updating status
+ * @new_status: used whenting status
  * Return: current status
  */
 
@@ -22,33 +22,33 @@ int statusmt(status_actions_t action, int new_status)
 /**
  * envimat - function that allows to access
  * our global variables anywhere in our program
- * and provides us with bunch of action to be applied to our
+ * and provides be applied to our
  * map
  *
- * @action: action that will be applied to our env
- * @key: string used when adding new entry or when
+ * @act: act that will be applied to our env
+ * @key: string useng new entry or when
  * retrieving data
  * @value: string used when adding new entry
- * Return: different types based on the given action
+ * Return: different ased on the given act
  */
-void *envimat(enviroment_action_t action,
+void *envimat(enviroment_action_t act,
 			  const char *key, const char *value)
 {
 	static map_t *map;
 
-	if (action == INIT_ENV)
+	if (act == INIT_ENV)
 		map = initMp();
-	else if (action == SET_ENTRY)
+	else if (act == SET_ENTRY)
 		valueSet(map, key, value);
-	else if (action == GET_VALUE)
+	else if (act == GET_VALUE)
 		return (_strdup(_get_value(map, key)));
-	else if (action == GET_KEYS)
+	else if (act == GET_KEYS)
 		return (_get_keys(map));
-	else if (action == CONVERT_INTO_2D)
+	else if (act == CONVERT_INTO_2D)
 		return (convert2darry());
-	else if (action == CLEAR_ENV)
+	else if (act == CLEAR_ENV)
 		clearMp(map);
-	else if (action == DELETE_ENTRY)
+	else if (act == DELETE_ENTRY)
 		deleteEntry(map, key);
 	return (NULL);
 }
@@ -57,22 +57,22 @@ void *envimat(enviroment_action_t action,
  * bMt - function that manages
  * builtins inside our application
  *
- * @action: action that will be applied to our
+ * @act: act that will bplied to our
  * builtins state managements
  * @name: name of the builtin
- * @function: builtin function that will be
+ * @function: builtin funct that will be
  * executed later
- * Return: (void *) function that associated to
+ * Return: (void *) funcassociated to
  * builtin or NULL
  */
-builtins_t bMt(builtin_actions_t action, char *name,
+builtins_t bMt(builtin_actions_t act, char *name,
 			   int (*function)(command_t *command))
 {
 	static builtin_t builtins[10];
 	static int size;
 	int iter;
 
-	if (action == GET_BUILTIN)
+	if (act == GET_BUILTIN)
 	{
 		iter = 0;
 		while (iter < size)
@@ -82,7 +82,7 @@ builtins_t bMt(builtin_actions_t action, char *name,
 			iter++;
 		}
 	}
-	if (action == SET_BUILTIN)
+	if (act == SET_BUILTIN)
 	{
 		_copy(builtins[size].name, name, _strlen(name));
 		builtins[size].function = function;
@@ -92,35 +92,35 @@ builtins_t bMt(builtin_actions_t action, char *name,
 }
 
 /**
- * globalStatus - state management that holds
- * some variables that will be used in different
+ * globalStatus - state mament that holds
+ * some variables that will used in different
  * places of the applications
  *
- * @action: actions that will be applied to
- * the globals state managements
+ * @act: actions that we applied to
+ * the globals state mements
  * @s: string to update string
  * Return: (void *)
  */
-void *globalStatus(globals_action_t action, char **s)
+void *globalStatus(globals_action_t act, char **s)
 {
 	static char *line, *shell_name, **array_2d;
 	static int line_number;
 
-	if (action == SET_LINE)
+	if (act == SET_LINE)
 		line = *s;
-	if (action == SET_SHELL_NAME)
+	if (act == SET_SHELL_NAME)
 		shell_name = *s;
-	if (action == GET_LINE)
+	if (act == GET_LINE)
 		return (line);
-	if (action == GET_SHELL_NAME)
+	if (act == GET_SHELL_NAME)
 		return (shell_name);
-	if (action == GET_LINE_NUMBER)
+	if (act == GET_LINE_NUMBER)
 		return (&line_number);
-	if (action == INCREMENT_LINE_NUMBER)
+	if (act == INCREMENT_LINE_NUMBER)
 		line_number++;
-	if (action == SET_2D)
+	if (act == SET_2D)
 		array_2d = s;
-	if (action == GET_2D)
+	if (act == GET_2D)
 		return (array_2d);
 	return (NULL);
 }
