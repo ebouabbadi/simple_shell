@@ -7,7 +7,7 @@
  * @av: arguments
  * Return: 0 sucess, otherwise error
  */
-int main(int ac, char *av[])
+int main(int ac, char **av)
 {
 	char *line, *ncmdLine;
 
