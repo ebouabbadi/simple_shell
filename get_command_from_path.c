@@ -16,7 +16,7 @@ char *_get_command_from_path(char *command)
 	if ((command[0] == '.' || command[0] == '/') &&
 		!stat(command, &st))
 		return (_strdup(command));
-	path = _enviroment_management(GET_VALUE, "PATH", NULL);
+	path = envimat(GET_VALUE, "PATH", NULL);
 	if (!path)
 		return (_strdup(command));
 	iterator = path_2d = _split(path, ":");

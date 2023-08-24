@@ -17,12 +17,12 @@ size_t find_next_newline(char *buffer, size_t length)
 	return (position);
 }
 /**
- * _getline - function takes address of line to fill with characters
+ * myGetline - function takes address of line to fill with characters
  *
  * @line: address to line that will be filled with characters
  * Return: number of read characters in case of error return -1
  */
-ssize_t _getline(char **line)
+ssize_t myGetline(char **line)
 {
 	static char buffer[BUFFER_SIZE];
 	static ssize_t current_position, end_of_buffer;

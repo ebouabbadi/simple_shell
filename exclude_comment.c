@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * _exclude_comment - remove comment from
+ * exclct - remove comment from
  * line
  *
  * @line: full line that user entered
  * Return: new_line without comment
  */
-char *_exclude_comment(const char *line)
+char *exclct(const char *line)
 {
 	int comment_position;
 

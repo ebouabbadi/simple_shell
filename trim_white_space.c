@@ -80,13 +80,13 @@ char *_get_newline_without_space_dup(const char *line, size_t end)
 }
 
 /**
- * _trim_white_space - function that returns new line
+ * trimspace - function that returns new line
  * with space removed from it
  *
  * @line: to check against
  * Return: newline without space duplicates
  */
-char *_trim_white_space(const char *line)
+char *trimspace(const char *line)
 {
 	size_t left, right;
 	char *s;

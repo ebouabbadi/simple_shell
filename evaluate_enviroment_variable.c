@@ -16,11 +16,11 @@ char *_evaluate_enviroment_variable(char *env_key)
 
 	if (_strcmp(env_key, "?"))
 	{
-		number = _status_management(GET_STATUS, 0);
+		number = statusmt(GET_STATUS, 0);
 		return (_itoa(number));
 	}
 	if (_strcmp(env_key, "$"))
 		return (_itoa(getpid()));
-	value = _enviroment_management(GET_VALUE, env_key, NULL);
+	value = envimat(GET_VALUE, env_key, NULL);
 	return (value);
 }

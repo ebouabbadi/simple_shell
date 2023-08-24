@@ -15,6 +15,6 @@ void _handle_sigint(int sig)
 	if (isatty(STDIN_FILENO))
 	{
 		_fprint(1, "\n%s> ",
-				_global_states(GET_SHELL_NAME, NULL));
+				globalStatus(GET_SHELL_NAME, NULL));
 	}
 }

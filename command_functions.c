@@ -27,7 +27,7 @@ void _free_command(void *data)
 char *_lookup_for_command(char *command, command_type_t *type)
 {
 
-	if (_builtin_management(GET_BUILTIN, command, NULL))
+	if (bMt(GET_BUILTIN, command, NULL))
 	{
 		*type = BUILTINS;
 		return (_strdup(command));
@@ -77,7 +77,7 @@ command_t *_handle_command(const char *line)
 	char **tokens[2];
 	int iterator;
 
-	trimmed_line = _trim_white_space(line);
+	trimmed_line = trimspace(line);
 	tokens[0] = _split(trimmed_line, " ");
 	free(trimmed_line);
 	if (!tokens[0])

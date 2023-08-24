@@ -14,13 +14,13 @@ int _cd_helper(const char *key)
 	char *s, buffer[200];
 
 	getcwd(buffer, 200);
-	s = _enviroment_management(GET_VALUE, key, NULL);
+	s = envimat(GET_VALUE, key, NULL);
 	if (chdir(s) == -1)
 	{
 		free(s);
 		return (errno);
 	}
-	_enviroment_management(SET_ENTRY, "OLDPWD", buffer);
+	envimat(SET_ENTRY, "OLDPWD", buffer);
 	free(s);
 	return (0);
 }
@@ -40,10 +40,10 @@ int _cd_helper2(const char *path)
 	getcwd(buffer, 200);
 	if (chdir(path) == -1)
 	{
-		perror(_global_states(GET_SHELL_NAME, NULL));
+		perror(globalStatus(GET_SHELL_NAME, NULL));
 		return (errno);
 	}
-	_enviroment_management(SET_ENTRY, "OLDPWD", buffer);
+	envimat(SET_ENTRY, "OLDPWD", buffer);
 	return (0);
 }
 

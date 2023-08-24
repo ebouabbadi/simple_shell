@@ -176,8 +176,8 @@ typedef int (*builtins_t)(command_t *);
 
 char *_copy(char *dest, const char *src, size_t size);
 void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
-ssize_t _getline(char **line);
-char *_trim_white_space(const char *line);
+ssize_t myGetline(char **line);
+char *trimspace(const char *line);
 int _parsing_error_handler(char *line);
 size_t _strlen(const char *s);
 void _free_split(char ***backets);
@@ -199,16 +199,16 @@ int _delete_entry(map_t *map, const char *key);
 command_t *_init_command(char **tokens);
 void _free_command(void *data);
 command_t *_handle_command(const char *line);
-int _semicolon_handler(const char *line);
+int semichr(const char *line);
 list_t *_pipe_handler(const char *line);
 int _handle_pipe_execution(list_t *pipes, int previous_stdin);
-int _status_management(status_actions_t action, int new_status);
+int statusmt(status_actions_t action, int new_status);
 void _handle_sigint(int sig);
-void *_enviroment_management(enviroment_action_t action,
+void *envimat(enviroment_action_t action,
 							 const char *key, const char *value);
-int _status_management(status_actions_t action, int new_status);
+int statusmt(status_actions_t action, int new_status);
 char **_convert_env_into_2d_array(void);
-void _feed_enviroment_variable(char **new_env);
+void feedEnv(char **new_env);
 char *_get_command_from_path(char *command);
 char *_strslice(const char *line, int start, int end);
 char *_strcat(const char *str1, const char *str2);
@@ -220,16 +220,16 @@ int _isdigit(const char *s);
 int _str2dlen(char **arr2d);
 int _atoi(const char *str);
 int __exit(command_t *command);
-builtins_t _builtin_management(builtin_actions_t action, char *name,
+builtins_t bMt(builtin_actions_t action, char *name,
 							   int (*function)(command_t *command));
 void _excute(command_t *command);
 int _setenv(command_t *command);
 int _unsetenv(command_t *command);
 int _fprint(int fd, const char *format, ...);
-void *_global_states(globals_action_t action, char **s);
+void *globalStatus(globals_action_t action, char **s);
 int _cd(command_t *command);
 void _handle_sigint(int sig);
-void _prompt(void);
+void pmt(void);
 int _get_comment_position(const char *line);
-char *_exclude_comment(const char *line);
+char *exclct(const char *line);
 #endif

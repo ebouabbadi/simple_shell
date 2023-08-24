@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _status_management - status state management is function that
+ * statusmt - status state management is function that
  * allows to access and apply actions to our status globaly
  * from any function
  *
@@ -10,7 +10,7 @@
  * Return: current status
  */
 
-int _status_management(status_actions_t action, int new_status)
+int statusmt(status_actions_t action, int new_status)
 {
 	static int status;
 
@@ -20,7 +20,7 @@ int _status_management(status_actions_t action, int new_status)
 }
 
 /**
- * _enviroment_management - function that allows to access
+ * envimat - function that allows to access
  * our global variables anywhere in our program
  * and provides us with bunch of action to be applied to our
  * map
@@ -31,8 +31,8 @@ int _status_management(status_actions_t action, int new_status)
  * @value: string used when adding new entry
  * Return: different types based on the given action
  */
-void *_enviroment_management(enviroment_action_t action,
-							 const char *key, const char *value)
+void *envimat(enviroment_action_t action,
+			  const char *key, const char *value)
 {
 	static map_t *map;
 
@@ -54,7 +54,7 @@ void *_enviroment_management(enviroment_action_t action,
 }
 
 /**
- * _builtin_management - function that manages
+ * bMt - function that manages
  * builtins inside our application
  *
  * @action: action that will be applied to our
@@ -65,8 +65,8 @@ void *_enviroment_management(enviroment_action_t action,
  * Return: (void *) function that associated to
  * builtin or NULL
  */
-builtins_t _builtin_management(builtin_actions_t action, char *name,
-							   int (*function)(command_t *command))
+builtins_t bMt(builtin_actions_t action, char *name,
+			   int (*function)(command_t *command))
 {
 	static builtin_t builtins[10];
 	static int size;
@@ -92,7 +92,7 @@ builtins_t _builtin_management(builtin_actions_t action, char *name,
 }
 
 /**
- * _global_states - state management that holds
+ * globalStatus - state management that holds
  * some variables that will be used in different
  * places of the applications
  *
@@ -101,7 +101,7 @@ builtins_t _builtin_management(builtin_actions_t action, char *name,
  * @s: string to update string
  * Return: (void *)
  */
-void *_global_states(globals_action_t action, char **s)
+void *globalStatus(globals_action_t action, char **s)
 {
 	static char *line, *shell_name, **array_2d;
 	static int line_number;
