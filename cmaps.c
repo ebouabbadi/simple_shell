@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _clear_entry - frees the memory allocated for an entry in the hash table.
+ * _clear_entry - free cated for an entry in the hash table.
  *
  * @data :  entry data
  *

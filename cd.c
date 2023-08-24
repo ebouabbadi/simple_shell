@@ -1,15 +1,15 @@
 #include "shell.h"
 
 /**
- * _cd_helper - function helper of cd
- * that takes key and look it up
- * in enviroments variable and change
+ * cdHelps - function helper of cd
+ * that takes key and lup
+ * in enviromentsble and change
  * directory to it
  *
  * @key: envs keys
- * Return: 0 success otherwise error
+ * Return: 0 succeerwise error
  */
-int _cd_helper(const char *key)
+int cdHelps(const char *key)
 {
 	char *s, buffer[200];
 
@@ -26,14 +26,14 @@ int _cd_helper(const char *key)
 }
 
 /**
- * _cd_helper2 - function that takes
+ * cdHelps2 - function that takes
  * path as parameter and change
  * directory to it
  *
  * @path: path to change directory to it
  * Return: 0 on success ortherwise error
  */
-int _cd_helper2(const char *path)
+int cdHelps2(const char *path)
 {
 	char buffer[200];
 
@@ -54,26 +54,26 @@ int _cd_helper2(const char *path)
  * folders (directories) in our operating
  * system
  *
- * @command: struct the stores information
+ * @cmd: struct the stores information
  * about passed commands
  * Return: (0) success otherwise errors
  */
-int _cd(command_t *command)
+int _cd(command_t *cmd)
 {
 	int len;
 
-	len = _str2dlen(command->arguments + 1);
+	len = _str2dlen(cmd->arguments + 1);
 
 	if (len >= 1)
 	{
-		if (_strcmp("-", command->arguments[1]))
-			return (_cd_helper("OLDPWD"));
-		else if (_strcmp("~", command->arguments[1]))
-			return (_cd_helper("HOME"));
+		if (_strcmp("-", cmd->arguments[1]))
+			return (cdHelps("OLDPWD"));
+		else if (_strcmp("~", cmd->arguments[1]))
+			return (cdHelps("HOME"));
 		else
-			return (_cd_helper2(command->arguments[1]));
+			return (cdHelps2(cmd->arguments[1]));
 	}
 	else if (!len)
-		return (_cd_helper("HOME"));
+		return (cdHelps("HOME"));
 	return (0);
 }
