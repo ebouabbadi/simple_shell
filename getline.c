@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * fxewline - function that look up for newline or end of the buffer
+ * find_next_newline - function that look up for newline or end of the buffer
  *
  * @buffer: buffer to look up in
  * @length: the length of the buffer
  * Return: number of read character or -1 in case of error
  */
-size_t fxewline(char *buffer, size_t length)
+size_t find_next_newline(char *buffer, size_t length)
 {
 	size_t position;
 
@@ -17,12 +17,12 @@ size_t fxewline(char *buffer, size_t length)
 	return (position);
 }
 /**
- * getLinee - function takes address of line to fill with characters
+ * _getline - function takes address of line to fill with characters
  *
  * @line: address to line that will be filled with characters
  * Return: number of read characters in case of error return -1
  */
-ssize_t getLinee(char **line)
+ssize_t _getline(char **line)
 {
 	static char buffer[BUFFER_SIZE];
 	static ssize_t current_position, end_of_buffer;
@@ -45,12 +45,12 @@ ssize_t getLinee(char **line)
 			if (end_of_buffer == 0)
 				return (old_size);
 		}
-		next_newline = fxewline(buffer + current_position,
+		next_newline = find_next_newline(buffer + current_position,
 										 end_of_buffer - current_position);
-		*line = mYrealloc(*line, old_size, old_size + next_newline);
+		*line = _realloc(*line, old_size, old_size + next_newline);
 		if (!*line)
 			return (-1);
-		myCopy((*line) + old_size, buffer + current_position, next_newline);
+		_copy((*line) + old_size, buffer + current_position, next_newline);
 		old_size += next_newline;
 		current_position += next_newline;
 		if (current_position < end_of_buffer)

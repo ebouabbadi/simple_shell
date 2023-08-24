@@ -60,7 +60,7 @@ int _fput_number(int fd, int number)
  */
 int _fputs(int fd, const char *s)
 {
-	return (write(fd, s, mYstrlen(s)));
+	return (write(fd, s, _strlen(s)));
 }
 
 /**

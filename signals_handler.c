@@ -14,7 +14,7 @@ void _handle_sigint(int sig)
 	fflush(stdin);
 	if (isatty(STDIN_FILENO))
 	{
-		myFprint(1, "\n%s> ",
-				 globalistNodeates(GET_SHELL_NAME, NULL));
+		_fprint(1, "\n%s> ",
+				_global_states(GET_SHELL_NAME, NULL));
 	}
 }

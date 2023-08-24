@@ -1,13 +1,13 @@
 #include "shell.h"
 /**
- * _get_length_wdp - function that returns
+ * _get_length_without_space_dup - function that returns
  * length of given string excluding duplicated spaces
  *
  * @line: to return it's length without duplicate
  * @end: the end of the line
  * Return: length
  */
-size_t _get_length_wdp(const char *line, size_t end)
+size_t _get_length_without_space_dup(const char *line, size_t end)
 {
 	size_t start, len;
 	int is_space;
@@ -36,14 +36,14 @@ size_t _get_length_wdp(const char *line, size_t end)
 }
 
 /**
- * _getdp - function returns
+ * _get_newline_without_space_dup - function returns
  * line after removing it's duplicated space
  *
  * @line: line to check against
  * @end: the end of the string exculding last spaces
  * Return: new string
  */
-char *_getdp(const char *line, size_t end)
+char *_get_newline_without_space_dup(const char *line, size_t end)
 {
 	size_t start, index;
 	int is_space;
@@ -53,7 +53,7 @@ char *_getdp(const char *line, size_t end)
 	is_space = 0;
 	index = 0;
 	newline = malloc(sizeof(char) *
-					 (_get_length_wdp(line, end + 1) + 1));
+					 (_get_length_without_space_dup(line, end + 1) + 1));
 	if (!newline)
 		return (NULL);
 	while (start <= end)
@@ -80,19 +80,19 @@ char *_getdp(const char *line, size_t end)
 }
 
 /**
- * trimWhiteSpc - function that returns new line
+ * _trim_white_space - function that returns new line
  * with space removed from it
  *
  * @line: to check against
  * Return: newline without space duplicates
  */
-char *trimWhiteSpc(const char *line)
+char *_trim_white_space(const char *line)
 {
 	size_t left, right;
 	char *s;
 
 	left = 0;
-	right = mYstrlen(line);
+	right = _strlen(line);
 	if (!right)
 	{
 		s = malloc(sizeof(char));
@@ -111,5 +111,5 @@ char *trimWhiteSpc(const char *line)
 		*s = 0;
 		return (s);
 	}
-	return (_getdp(line + left, right - left));
+	return (_get_newline_without_space_dup(line + left, right - left));
 }

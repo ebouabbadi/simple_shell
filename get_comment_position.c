@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * getCcpt - function that returns the
+ * _get_comment_position - function that returns the
  * position of the # or the length of the line
  * if # not found
  *
@@ -9,7 +9,7 @@
  * Return: (integer) position of the #
  * or the length if not found
  */
-int getCcpt(const char *line)
+int _get_comment_position(const char *line)
 {
 	int i;
 

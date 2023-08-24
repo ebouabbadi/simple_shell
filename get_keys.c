@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * getKey - retrieves a linked list of all the keys in the hash table.
+ * _get_keys - retrieves a linked list of all the keys in the hash table.
  *
  *@map: map to retrieve
  * Return: list of keys
  */
-list_t    *getKey(const map_t *map)
+list_t    *_get_keys(const map_t *map)
 {
 	list_t    *list, *iterator;
 	entry_t  *entry;
@@ -20,7 +20,7 @@ list_t    *getKey(const map_t *map)
 		while (iterator)
 		{
 			entry = iterator->data;
-			addToLst(&list, strArrduppp(entry->key));
+			add_to_list(&list, _strdup(entry->key));
 			iterator = iterator->next;
 		}
 		iter++;

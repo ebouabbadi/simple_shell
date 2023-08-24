@@ -1,16 +1,16 @@
 #include "shell.h"
 
 /**
- * ppt - function that asks
+ * _prompt - function that asks
  * a user to enter a command
  *
  * Return: Nothing (void)
  */
-void ppt(void)
+void _prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		myFprint(1, "%s> ",
-				globalistNodeates(GET_SHELL_NAME, NULL));
+		_fprint(1, "%s> ",
+				_global_states(GET_SHELL_NAME, NULL));
 	}
 }

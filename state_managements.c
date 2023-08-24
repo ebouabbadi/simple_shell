@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * statusMgt - status state management is function that
+ * _status_management - status state management is function that
  * allows to access and apply actions to our status globaly
  * from any function
  *
@@ -10,7 +10,7 @@
  * Return: current status
  */
 
-int statusMgt(status_actions_t action, int new_status)
+int _status_management(status_actions_t action, int new_status)
 {
 	static int status;
 
@@ -20,7 +20,7 @@ int statusMgt(status_actions_t action, int new_status)
 }
 
 /**
- * envMgt - function that allows to access
+ * _enviroment_management - function that allows to access
  * our global variables anywhere in our program
  * and provides us with bunch of action to be applied to our
  * map
@@ -31,30 +31,30 @@ int statusMgt(status_actions_t action, int new_status)
  * @value: string used when adding new entry
  * Return: different types based on the given action
  */
-void *envMgt(enviroment_action_t action,
+void *_enviroment_management(enviroment_action_t action,
 							 const char *key, const char *value)
 {
 	static map_t *map;
 
 	if (action == INIT_ENV)
-		map = initMp();
+		map = _init_map();
 	else if (action == SET_ENTRY)
-		setValue(map, key, value);
+		_set_value(map, key, value);
 	else if (action == GET_VALUE)
-		return (strduppp(getValue(map, key)));
+		return (_strdup(_get_value(map, key)));
 	else if (action == GET_KEYS)
-		return (getKey(map));
+		return (_get_keys(map));
 	else if (action == CONVERT_INTO_2D)
-		return (ctEnvintoarray());
+		return (_convert_env_into_2d_array());
 	else if (action == CLEAR_ENV)
-		clearMap(map);
+		_clear_map(map);
 	else if (action == DELETE_ENTRY)
-		deleteEntry(map, key);
+		_delete_entry(map, key);
 	return (NULL);
 }
 
 /**
- * bMgt - function that manages
+ * _builtin_management - function that manages
  * builtins inside our application
  *
  * @action: action that will be applied to our
@@ -65,7 +65,7 @@ void *envMgt(enviroment_action_t action,
  * Return: (void *) function that associated to
  * builtin or NULL
  */
-builtins_t bMgt(builtin_actions_t action, char *name,
+builtins_t _builtin_management(builtin_actions_t action, char *name,
 							   int (*function)(command_t *command))
 {
 	static builtin_t builtins[10];
@@ -77,14 +77,14 @@ builtins_t bMgt(builtin_actions_t action, char *name,
 		iter = 0;
 		while (iter < size)
 		{
-			if (myStrcmp(builtins[iter].name, name))
+			if (_strcmp(builtins[iter].name, name))
 				return (builtins[iter].function);
 			iter++;
 		}
 	}
 	if (action == SET_BUILTIN)
 	{
-		myCopy(builtins[size].name, name, mYstrlen(name));
+		_copy(builtins[size].name, name, _strlen(name));
 		builtins[size].function = function;
 		size++;
 	}
@@ -92,7 +92,7 @@ builtins_t bMgt(builtin_actions_t action, char *name,
 }
 
 /**
- * globalStates - state management that holds
+ * _global_states - state management that holds
  * some variables that will be used in different
  * places of the applications
  *
@@ -101,7 +101,7 @@ builtins_t bMgt(builtin_actions_t action, char *name,
  * @s: string to update string
  * Return: (void *)
  */
-void *globalStates(globals_action_t action, char **s)
+void *_global_states(globals_action_t action, char **s)
 {
 	static char *line, *shell_name, **array_2d;
 	static int line_number;

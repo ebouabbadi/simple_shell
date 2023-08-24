@@ -11,17 +11,17 @@
 #include <signal.h>
 #include <dirent.h>
 #include <stdarg.h>
-#define buffxd_SIZE 1024
+#define BUFFER_SIZE 1024
 #define BACKET_SIZE 64
 
 /**
- *strArruct entry_s - strArruct that hold key and value
+ *struct entry_s - struct that hold key and value
  * of hash table
  *
  *@key: the key used to retrieve values
  *@value: the respective data for the key
  */
-typedef strArruct entry_s
+typedef struct entry_s
 {
 	char *key;
 	char *value;
@@ -41,15 +41,15 @@ typedef enum status_actions_e
 } status_actions_t;
 
 /**
- * strArruct list_s - node of linkedlist
+ * struct list_s - node of linkedlist
  *
  * @data: linkedlist content
  * @next: next node
  */
-typedef strArruct list_s
+typedef struct list_s
 {
 	void *data;
-	strArruct list_s *next;
+	struct list_s *next;
 } list_t;
 
 /**
@@ -66,21 +66,21 @@ typedef enum command_type_e
 	NOT_FOUND
 } command_type_t;
 /**
- * strArruct command_s - strArruct that holds informations
+ * struct command_s - struct that holds informations
  * about command
  *
  * @name: name of the command
  * @arguments: command arguments
  * @type: type of the command
  */
-typedef strArruct command_s
+typedef struct command_s
 {
 	char *name;
 	char **arguments;
 	command_type_t type;
 } command_t;
 /**
- * strArruct builtin_s - builtin strArruct
+ * struct builtin_s - builtin struct
  * that will contain name of builtins
  * and it respective function to be
  * executed
@@ -89,7 +89,7 @@ typedef strArruct command_s
  * @function: builtin function
  *
  */
-typedef strArruct builtin_s
+typedef struct builtin_s
 {
 	char name[30];
 	int (*function)(command_t *command);
@@ -107,12 +107,12 @@ typedef enum builtin_actions_e
 	SET_BUILTIN
 } builtin_actions_t;
 /**
- * strArruct map_s - defines a strArructure for a hash table
+ * struct map_s - defines a structure for a hash table
  *
  * @backets: an array of linkedlist where
  * our entry data will be stored
  */
-typedef strArruct map_s
+typedef struct map_s
 {
 	list_t *backets[BACKET_SIZE];
 } map_t;
@@ -174,62 +174,62 @@ typedef enum globals_action_e
 
 typedef int (*builtins_t)(command_t *);
 
-char *myCopy(char *dest, const char *src, size_t size);
-void *mYrealloc(void *old_buffxd, size_t old_size, size_t new_size);
-ssize_t getLinee(char **line);
-char *trimWhiteSpc(const char *line);
+char *_copy(char *dest, const char *src, size_t size);
+void *_realloc(void *old_buffer, size_t old_size, size_t new_size);
+ssize_t _getline(char **line);
+char *_trim_white_space(const char *line);
 int _parsing_error_handler(char *line);
-size_t mYstrArrlen(const char *s);
-void freeesplitMy(char ***backets);
-char **splitMy(const char *line, const char *diameter);
-list_t *addToLst(list_t **listNode, void *data);
+size_t _strlen(const char *s);
+void _free_split(char ***backets);
+char **_split(const char *line, const char *diameter);
+list_t *add_to_list(list_t **lst, void *data);
 void *pop_from_list(list_t **list);
 size_t _listlen(const list_t *list);
 void free_list(list_t *list, void (*free_content)(void *data));
-int mystrArrcmp(const char *strArr1, const char *strArr2);
-char *strArrduppp(const char *strArr);
+int _strcmp(const char *str1, const char *str2);
+char *_strdup(const char *str);
 int _get_hash_code(const char *key);
-map_t *initMp(void);
-int setValue(map_t *map, const char *key, const char *value);
-char *getValue(const map_t *map, const char *key);
+map_t *_init_map(void);
+int _set_value(map_t *map, const char *key, const char *value);
+char *_get_value(const map_t *map, const char *key);
 void _clear_entry(void *data);
-void clearMap(map_t *map);
-list_t *getKey(const map_t *map);
-int deleteEntry(map_t *map, const char *key);
+void _clear_map(map_t *map);
+list_t *_get_keys(const map_t *map);
+int _delete_entry(map_t *map, const char *key);
 command_t *_init_command(char **tokens);
 void _free_command(void *data);
 command_t *_handle_command(const char *line);
-int seminHandler(const char *line);
+int _semicolon_handler(const charz*line);
 list_t *_pipe_handler(const char *line);
 int _handle_pipe_execution(list_t *pipes, int previous_stdin);
-int statusMgt(status_actions_t action, int new_status);
+int _status_management(status_actions_t action, int new_status);
 void _handle_sigint(int sig);
-void *envMgt(enviroment_action_t action,
-			 const char *key, const char *value);
-int statusMgt(status_actions_t action, int new_status);
-char **ctEnvintoarray(void);
-void feedEnvVar(char **new_env);
+void *_enviroment_management(enviroment_action_t action,
+							 const char *key, const char *value);
+int _status_management(status_actions_t action, int new_status);
+char **_convert_env_into_2d_array(void);
+void _feed_enviroment_variable(char **new_env);
 char *_get_command_from_path(char *command);
-char *strArrSliceer(const char *line, int start, int end);
-char *_strArrcat(const char *strArr1, const char *strArr2);
+char *_strslice(const char *line, int start, int end);
+char *_strcat(const char *str1, const char *str2);
 char *_itoa(int number);
 char *_evaluate_enviroment_variable(char *env_key);
 char **_trim_2darray(char **arr);
 int _env(command_t *command);
 int _isdigit(const char *s);
-int _strArr2dlen(char **arr2d);
-int myAtoi(const char *strArr);
+int _str2dlen(char **arr2d);
+int _atoi(const char *str);
 int __exit(command_t *command);
-builtins_t bMgt(builtin_actions_t action, char *name,
-				int (*function)(command_t *command));
+builtins_t _builtin_management(builtin_actions_t action, char *name,
+							   int (*function)(command_t *command));
 void _excute(command_t *command);
 int _setenv(command_t *command);
 int _unsetenv(command_t *command);
-int myFprint(int fd, const char *format, ...);
-void *globalistNodeates(globals_action_t action, char **s);
-int myCd(command_t *command);
+int _fprint(int fd, const char *format, ...);
+void *_global_states(globals_action_t action, char **s);
+int _cd(command_t *command);
 void _handle_sigint(int sig);
-void ppt(void);
-int getCcpt(const char *line);
-char *excludeComt(const char *line);
+void _prompt(void);
+int _get_comment_position(const char *line);
+char *_exclude_comment(const char *line);
 #endif

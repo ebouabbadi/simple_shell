@@ -126,7 +126,7 @@ void free_backets(char **backets, size_t current_position)
 	free(backets);
 }
 /**
- * splitMy - function that splits given line by
+ * _split - function that splits given line by
  * given diameter
  *
  * @line: buffer to be splitted
@@ -134,7 +134,7 @@ void free_backets(char **backets, size_t current_position)
  * Return: 2d array that ends with NULL
  * or NULL in case of error
  */
-char **splitMy(const char *line, const char *diameter)
+char **_split(const char *line, const char *diameter)
 {
 	char **backets;
 	size_t backet_length, current_line_position, backet_index;

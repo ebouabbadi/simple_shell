@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * freeesplitMy - function that frees the allocted backets
+ * _free_split - function that frees the allocted backets
  *
  * @backets: backets to free
  * Return: void
  */
-void freeesplitMy(char ***backets)
+void _free_split(char ***backets)
 {
 	char **head;
 

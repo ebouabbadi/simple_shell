@@ -14,28 +14,28 @@ void _execution_handler(command_t *command)
 		_excute(command);
 	else
 	{
-		myFprint(2, "%s: %d: %s: Permission denied\n",
-				(char *)globalistNodeates(GET_SHELL_NAME, NULL),
-				*((int *)globalistNodeates(GET_LINE_NUMBER, NULL)),
+		_fprint(2, "%s: %d: %s: Permission denied\n",
+				(char *)_global_states(GET_SHELL_NAME, NULL),
+				*((int *)_global_states(GET_LINE_NUMBER, NULL)),
 				command->name);
-		statusMgt(UPDATE_STATUS, 126);
+		_status_management(UPDATE_STATUS, 126);
 	}
 }
 /**
- * seminHandler - function that splits given
+ * _semicolon_handler - function that splits given
  * line bu semicolon and pass the result to be
  * handled by other functions
  *
  * @line: command line to be parsed and executed
  * Return: 1 on success or 0 signifying error
  */
-int seminHandler(const char *line)
+int _semicolon_handler(const char *line)
 {
 	char **semi_commands, **iterator;
 	command_t *command;
 	int argument_length;
 
-	iterator = semi_commands = splitMy(line, ";");
+	iterator = semi_commands = _split(line, ";");
 	if (!iterator)
 		return (1);
 	while (*iterator)
@@ -43,28 +43,28 @@ int seminHandler(const char *line)
 		command = _handle_command(*iterator);
 		if (command->type == NOT_FOUND)
 		{
-			myFprint(2, "%s: %d: %s: not found\n",
-					(char *)globalistNodeates(GET_SHELL_NAME, NULL),
-					*((int *)globalistNodeates(GET_LINE_NUMBER, NULL)),
+			_fprint(2, "%s: %d: %s: not found\n",
+					(char *)_global_states(GET_SHELL_NAME, NULL),
+					*((int *)_global_states(GET_LINE_NUMBER, NULL)),
 					command->name);
-			statusMgt(UPDATE_STATUS, 127);
+			_status_management(UPDATE_STATUS, 127);
 		}
 		else if (command->type == EXTERNAL)
 			_execution_handler(command);
 		else
 		{
-			globalistNodeates(SET_2D, semi_commands);
-			statusMgt(UPDATE_STATUS,
-							   bMgt(
+			_global_states(SET_2D, semi_commands);
+			_status_management(UPDATE_STATUS,
+							   _builtin_management(
 								   GET_BUILTIN,
 								   command->name, NULL)(command));
 		}
-		argument_length = stringArr2dlenn(command->arguments);
-		envMgt(SET_ENTRY, "_",
+		argument_length = _str2dlen(command->arguments);
+		_enviroment_management(SET_ENTRY, "_",
 							   command->arguments[argument_length - 1]);
 		_free_command(command);
 		iterator++;
 	}
-	freeesplitMy(&semi_commands);
+	_free_split(&semi_commands);
 	return (0);
 }

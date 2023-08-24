@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * mYstrArrlen - function that calculate the length of given strArring
+ * _strlen - function that calculate the length of given string
  *
- * @s: strArring (characters)
+ * @s: string (characters)
  * Return: number of characters
  */
-size_t mYstrArrlen(const char *s)
+size_t _strlen(const char *s)
 {
 	size_t len;
 

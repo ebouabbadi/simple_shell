@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * stringArr2dlenn - function that counts
+ * _str2dlen - function that counts
  * the length of 2d array
  *
  * @arr2d: to count it's length
  * Return: length of given array
  */
-int stringArr2dlenn(char **arr2d)
+int _str2dlen(char **arr2d)
 {
 	int len;
 

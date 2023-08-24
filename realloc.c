@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * mYrealloc - function that takes buffer and increase it's size
+ * _realloc - function that takes buffer and increase it's size
  *
  * @old_buffer: old data of the buffer
  * @old_size: size of the buffer before update
  * @new_size: size of the buffer after
  * Return: buffer after it's being allocated, NULL in error
  */
-void *mYrealloc(void *old_buffer, size_t old_size, size_t new_size)
+void *_realloc(void *old_buffer, size_t old_size, size_t new_size)
 {
 	unsigned char *buffer;
 	unsigned char *char_buffer;

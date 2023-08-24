@@ -1,35 +1,35 @@
 #include "shell.h"
 
 /**
- * _strArrcat  - function that takes 2 strArring and
+ * _strcat  - function that takes 2 string and
  * combines them
  *
- * @strArr1: first strArring
- * @strArr2: second strArring
- * Return: the combination of first and second strArring
+ * @str1: first string
+ * @str2: second string
+ * Return: the combination of first and second string
  * NULL on error case
  */
-char *_strArrcat(const char *strArr1, const char *strArr2)
+char *_strcat(const char *str1, const char *str2)
 {
 	size_t len1, len2, iter;
-	char *newstrArr;
+	char *newstr;
 
-	len1 = mYstrArrlen(strArr1);
-	len2 = mYstrArrlen(strArr2);
-	newstrArr = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!newstrArr)
+	len1 = _strlen(str1);
+	len2 = _strlen(str2);
+	newstr = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!newstr)
 		return (NULL);
 	iter = 0;
 	while (iter < len1)
 	{
-		newstrArr[iter] = strArr1[iter];
+		newstr[iter] = str1[iter];
 		iter++;
 	}
 	while (iter - len1 < len2)
 	{
-		newstrArr[iter] = strArr2[iter - len1];
+		newstr[iter] = str2[iter - len1];
 		iter++;
 	}
-	newstrArr[iter] = 0;
-	return (newstrArr);
+	newstr[iter] = 0;
+	return (newstr);
 }

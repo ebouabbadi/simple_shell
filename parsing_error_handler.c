@@ -52,7 +52,7 @@ int _parsing_error_handler(char *line)
 
 	if (!line || !*line)
 		return (0);
-	len = mYstrlen(line);
+	len = _strlen(line);
 	if (line[0] == ';' || line[0] == '|' ||
 		line[len - 1] == '|' ||
 		line[len - 1] == '>' || line[len - 1] == '<')

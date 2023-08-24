@@ -1,24 +1,24 @@
 #include "shell.h"
 
 /**
- * mystrArrcmp - function checks  wether given strArrings
+ * _strcmp - function checks  wether given strings
  * are identical or not
  *
- * @strArr1: first strArring to check against
- * @strArr2: second strArring to check against
+ * @str1: first string to check against
+ * @str2: second string to check against
  *
  * Return: 1 success case, 0 error case
  */
-int mystrArrcmp(const char *strArr1, const char *strArr2)
+int _strcmp(const char *str1, const char *str2)
 {
-	if (!strArr1 || !strArr2)
+	if (!str1 || !str2)
 		return (0);
-	while (*strArr1 && *strArr2 && *strArr1 == *strArr2)
+	while (*str1 && *str2 && *str1 == *str2)
 	{
-		strArr1++;
-		strArr2++;
+		str1++;
+		str2++;
 	}
-	if (!*strArr1 && !*strArr2)
+	if (!*str1 && !*str2)
 		return (1);
 	return (0);
 }

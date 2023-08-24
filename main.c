@@ -21,7 +21,7 @@ int main(int ac, char *av[])
 	bMgt(SET_BUILTIN, "unsetenv", _unsetenv);
 	bMgt(SET_BUILTIN, "cd", _cd);
 	globalStates(SET_SHELL_NAME, &av[0]);
-	while (true)
+	while (1)
 	{
 		ppt();
 		getLinee(&line);
