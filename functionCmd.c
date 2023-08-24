@@ -87,7 +87,7 @@ command_t *handlcmd(const char *line)
 	{
 		if (tokens[0][iterator][0] == '$')
 		{
-			nCmd = _evaluate_enviroment_variable(tokens[0][iterator] + 1);
+			nCmd = varEnvm(tokens[0][iterator] + 1);
 			free(tokens[0][iterator]);
 			if (nCmd)
 				tokens[0][iterator] = nCmd;

@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _evaluate_enviroment_variable - function
+ * varEnvm - function
  * that takes key and return it's respective
  * value
  *
@@ -9,18 +9,18 @@
  * variables
  * Return: corresponding value to given key
  */
-char *_evaluate_enviroment_variable(char *env_key)
+char *varEnvm(char *env_key)
 {
-	char *value;
-	int number;
+	char *v;
+	int n;
 
 	if (_strcmp(env_key, "?"))
 	{
-		number = statusmt(GET_STATUS, 0);
-		return (_itoa(number));
+		n = statusmt(GET_STATUS, 0);
+		return (_itoa(n));
 	}
 	if (_strcmp(env_key, "$"))
 		return (_itoa(getpid()));
-	value = envimat(GET_VALUE, env_key, NULL);
-	return (value);
+	v = envimat(GET_VALUE, env_key, NULL);
+	return (v);
 }

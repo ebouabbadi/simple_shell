@@ -43,7 +43,7 @@ void *envimat(enviroment_action_t act,
 	else if (act == GET_VALUE)
 		return (_strdup(_get_value(map, key)));
 	else if (act == GET_KEYS)
-		return (_get_keys(map));
+		return (keyGetGen(map));
 	else if (act == CONVERT_INTO_2D)
 		return (convert2darry());
 	else if (act == CLEAR_ENV)

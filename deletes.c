@@ -11,17 +11,17 @@
 int deleteEntry(map_t *map, const char *key)
 {
 	list_t *list, *tmp;
-	int backet_index;
+	int lmgal;
 	entry_t *entry;
 
-	backet_index = hachcode(key);
-	list = map->backets[backet_index];
+	lmgal = hachcode(key);
+	list = map->backets[lmgal];
 	if (!list)
 		return (0);
 	entry = list->data;
 	if (_strcmp(entry->key, key))
 	{
-		map->backets[backet_index] = list->next;
+		map->backets[lmgal] = list->next;
 		_clear_entry(list->data);
 		free(list);
 		return (0);
