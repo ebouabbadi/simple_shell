@@ -199,7 +199,7 @@ int _delete_entry(map_t *map, const char *key);
 command_t *_init_command(char **tokens);
 void _free_command(void *data);
 command_t *_handle_command(const char *line);
-int _semicolon_handler(const charz*line);
+int _semicolon_handler(const char *line);
 list_t *_pipe_handler(const char *line);
 int _handle_pipe_execution(list_t *pipes, int previous_stdin);
 int _status_management(status_actions_t action, int new_status);
